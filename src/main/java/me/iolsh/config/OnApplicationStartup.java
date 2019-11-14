@@ -23,11 +23,10 @@ public class OnApplicationStartup {
 
     @PostConstruct
     public void init() {
-        populateDatabase();
+        populateBooksInDatabase();
     }
 
-    private void populateDatabase() {
-        System.out.println("Populating database!");
+    private void populateBooksInDatabase() {
         IntStream.range(1,10).mapToObj((i) -> UUID.randomUUID().toString()).forEach(this::createBook);
     }
 
