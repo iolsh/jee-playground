@@ -31,9 +31,7 @@ public class OnApplicationStartup {
     }
 
     private void createBook(String id) {
-
         bookRepository.create(randomBook(id));
-
     }
     
     private Book randomBook(String id) {
@@ -45,6 +43,4 @@ public class OnApplicationStartup {
                 .year(faker.number().numberBetween(1900, 2019))
                 .build();
     }
-
-
 }

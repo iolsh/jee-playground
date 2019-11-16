@@ -13,7 +13,7 @@
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <version.javaee>8.0</version.javaee>
-        <version.payara.micro>5.182</version.payara.micro>
+        <version.payara.micro>5.183</version.payara.micro>
         <version.swagger>2.0.0</version.swagger>
         <version.lombok>1.16.16</version.lombok>
     </properties>
@@ -52,7 +52,11 @@
             <artifactId>swagger-jaxrs2-servlet-initializer</artifactId>
             <version>${version.swagger}</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.mindrot.bcrypt</groupId>
+            <artifactId>bcrypt</artifactId>
+            <version>0.3</version>
+        </dependency>
         <dependency>
             <groupId>com.github.javafaker</groupId>
             <artifactId>javafaker</artifactId>
@@ -100,4 +104,10 @@
             </plugin>
         </plugins>
     </build>
+    <repositories>
+        <repository>
+            <id>bedatadriven</id>
+            <url>https://nexus.bedatadriven.com/content/repositories/public/</url>
+        </repository>
+    </repositories>
 </project>

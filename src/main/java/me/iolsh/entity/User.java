@@ -1,23 +1,19 @@
 package me.iolsh.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
+@NamedQuery(name = User.FIND_USER_BY_USER_NAME,  query = "select u from User u where u.userName = :userName")
 public class User {
-
+    public static final String FIND_USER_BY_USER_NAME = "findUserByUserName";
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -27,7 +23,4 @@ public class User {
     private String firstName;
     private String lastName;
     private String email;
-
-
-
 }

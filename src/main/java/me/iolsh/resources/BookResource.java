@@ -1,10 +1,10 @@
 package me.iolsh.resources;
 
+import me.iolsh.config.Secure;
 import me.iolsh.entity.Book;
 import me.iolsh.repository.BookRepository;
 
 import javax.inject.Inject;
-import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -14,7 +14,7 @@ import java.util.List;
 
 @Path("books")
 @Produces(MediaType.APPLICATION_JSON)
-@Consumes(MediaType.APPLICATION_JSON)
+@Secure
 public class BookResource {
 
     @Inject
