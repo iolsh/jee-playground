@@ -1,4 +1,4 @@
-package me.iolsh.config;
+package me.iolsh.application.config;
 
 import com.github.javafaker.Faker;
 
@@ -8,7 +8,8 @@ import javax.enterprise.inject.spi.InjectionPoint;
 import java.util.logging.Logger;
 
 @ApplicationScoped
-public class Producers {
+public class Config {
+
     @Produces
     public Faker createFaker(final InjectionPoint injectionPoint) {
         return new Faker();

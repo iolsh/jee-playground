@@ -1,7 +1,8 @@
-package me.iolsh.resources;
+package me.iolsh.api.resources;
 
-import me.iolsh.config.Secure;
-import me.iolsh.entity.Book;
+import me.iolsh.api.model.BookModel;
+import me.iolsh.application.security.Secure;
+import me.iolsh.mappers.EntityToBookModelMapper;
 import me.iolsh.repository.BookRepository;
 
 import javax.inject.Inject;
@@ -11,6 +12,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Path("/api/books")
 @Produces(MediaType.APPLICATION_JSON)
@@ -19,10 +21,13 @@ public class BookResource {
 
     @Inject
     private BookRepository bookRepository;
+    @Inject
+    private EntityToBookModelMapper entityToBookModelMapper;
 
     @GET
     public Response getBooks() {
-        List<Book> books = bookRepository.findAll();
+        List<BookModel> books = bookRepository.findAll().stream().map(entityToBookModelMapper::mapEntityToBook)
+                .collect(Collectors.toList());
         return Response.status(Response.Status.OK).entity(books).build();
     }
 }

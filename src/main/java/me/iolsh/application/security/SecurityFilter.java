@@ -1,7 +1,7 @@
-package me.iolsh.config;
+package me.iolsh.application.security;
 
 import io.jsonwebtoken.Jwts;
-import me.iolsh.util.Security;
+
 import javax.annotation.Priority;
 import javax.inject.Inject;
 import javax.ws.rs.NotAuthorizedException;

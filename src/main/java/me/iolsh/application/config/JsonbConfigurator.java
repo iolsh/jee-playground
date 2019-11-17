@@ -1,4 +1,4 @@
-package me.iolsh.config;
+package me.iolsh.application.config;
 
 import javax.json.bind.Jsonb;
 import javax.json.bind.JsonbBuilder;

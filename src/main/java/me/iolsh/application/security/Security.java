@@ -1,4 +1,4 @@
-package me.iolsh.util;
+package me.iolsh.application.security;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
 import io.jsonwebtoken.Jwts;

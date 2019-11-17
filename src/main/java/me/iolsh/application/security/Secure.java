@@ -1,4 +1,4 @@
-package me.iolsh.config;
+package me.iolsh.application.security;
 
 import javax.ws.rs.NameBinding;
 import java.lang.annotation.ElementType;

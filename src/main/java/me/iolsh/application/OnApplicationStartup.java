@@ -1,4 +1,4 @@
-package me.iolsh.config;
+package me.iolsh.application;
 
 import com.github.javafaker.Faker;
 import me.iolsh.entity.Book;

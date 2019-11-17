@@ -1,9 +1,9 @@
-package me.iolsh.config;
+package me.iolsh.application;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
 @ApplicationPath("/")
-public class Main extends Application {
+public class ApplicationServices extends Application {
 
 }
