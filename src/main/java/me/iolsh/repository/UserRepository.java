@@ -1,13 +1,14 @@
 package me.iolsh.repository;
 
 import me.iolsh.entity.User;
+import me.iolsh.exceptions.InvalidCredentialsException;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
-import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -28,10 +29,19 @@ public class UserRepository {
         entityManager.persist(user);
     }
 
-    public Optional<User> findUserByUserName(String userName) {
-        User user = entityManager.createNamedQuery(User.FIND_USER_BY_USER_NAME, User.class)
-                .setParameter("userName", userName).getSingleResult();
-        return Optional.ofNullable(user);
+    public User getRegisteredUserByUserName(String userName) {
+        try {
+            return findUserByUserName(userName);
+        } catch (NoResultException e) {
+            throw new InvalidCredentialsException();
+        }
     }
+
+    public User findUserByUserName(String userName) {
+        return entityManager.createNamedQuery(User.FIND_USER_BY_USER_NAME, User.class)
+            .setParameter("userName", userName).getSingleResult();
+
+    }
+
 
 }

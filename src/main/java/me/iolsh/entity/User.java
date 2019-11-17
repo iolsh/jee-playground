@@ -1,15 +1,11 @@
 package me.iolsh.entity;
 
 import lombok.*;
-
 import javax.persistence.*;
 
 @Entity
 @Getter
 @Setter
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 @ToString
 @NamedQuery(name = User.FIND_USER_BY_USER_NAME,  query = "select u from User u where u.userName = :userName")
 public class User {
