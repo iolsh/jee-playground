@@ -1,4 +1,7 @@
-package me.iolsh.exceptions;
+package me.iolsh.exceptions.mapper;
+
+import me.iolsh.exceptions.InvalidCredentialsException;
+import me.iolsh.exceptions.RestExceptionTemplate;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;

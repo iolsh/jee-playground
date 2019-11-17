@@ -1,4 +1,7 @@
-package me.iolsh.exceptions;
+package me.iolsh.exceptions.mapper;
+
+import me.iolsh.exceptions.RestExceptionTemplate;
+import me.iolsh.exceptions.UserAlreadyExistsException;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;

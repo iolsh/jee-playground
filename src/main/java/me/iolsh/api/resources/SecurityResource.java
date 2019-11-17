@@ -10,6 +10,7 @@ import me.iolsh.application.security.Security;
 
 import javax.inject.Inject;
 import javax.persistence.NoResultException;
+import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 
@@ -29,7 +30,8 @@ public class SecurityResource {
 
     @POST
     @Path("register")
-    public Response register(UserModel user) {
+    @Valid
+    public Response register(@Valid  UserModel user) {
         //TODO refactor crap
         try {
             userRepository.findUserByUserName(user.getUserName());
@@ -43,7 +45,7 @@ public class SecurityResource {
 
     @POST
     @Path("login")
-    public Response login(LoginModel loginModel) {
+    public Response login(@Valid  LoginModel loginModel) {
         User user = userRepository.getRegisteredUserByUserName(loginModel.getUserName());
         String hash = user.getPassword();
         if (security.verifyPassword(loginModel.getPassword(), hash)) {
