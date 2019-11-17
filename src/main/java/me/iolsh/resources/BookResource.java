@@ -12,7 +12,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
-@Path("books")
+@Path("/api/books")
 @Produces(MediaType.APPLICATION_JSON)
 @Secure
 public class BookResource {

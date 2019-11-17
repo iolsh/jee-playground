@@ -1,9 +1,9 @@
 package me.iolsh.util;
 
+import at.favre.lib.crypto.bcrypt.BCrypt;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import me.iolsh.entity.User;
-import org.mindrot.bcrypt.BCrypt;
 import javax.crypto.spec.SecretKeySpec;
 import javax.enterprise.context.ApplicationScoped;
 import javax.ws.rs.core.UriInfo;
@@ -37,11 +37,12 @@ public class Security {
     }
 
     public String hash(String text) {
-        return BCrypt.hashpw(text, BCrypt.gensalt());
+        return BCrypt.withDefaults().hashToString(12, text.toCharArray());
     }
 
     public boolean verifyPassword(String candidate, String hashed) {
-        return BCrypt.checkpw(candidate, hashed);
+        BCrypt.Result result = BCrypt.verifyer().verify(candidate.toCharArray(), hashed);
+        return result.verified;
     }
 
 }

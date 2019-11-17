@@ -14,7 +14,7 @@ import java.util.logging.Logger;
 
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
-@Path("/sec")
+@Path("")
 public class SecurityResource {
 
     @Context
@@ -28,18 +28,18 @@ public class SecurityResource {
     private Security security;
 
     @POST
-    @Path("/register")
+    @Path("register")
     public Response register(User user) {
-        logger.log(Level.INFO, "Got user {0}", user);
+        //logger.log(Level.INFO, "Got user {0}", user);
         user.setPassword(security.hash(user.getPassword()));
         userRepository.create(user);
         return Response.noContent().build();
     }
 
     @POST
-    @Path("/login")
+    @Path("login")
     public Response login(Login login) {
-        logger.log(Level.INFO, "Login {0}", login);
+        //logger.log(Level.INFO, "Login {0}", login);
         Optional<User> user = userRepository.findUserByUserName(login.getUserName());
         if (user.isPresent()) {
             String hash = user.get().getPassword();

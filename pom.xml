@@ -13,9 +13,10 @@
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <version.javaee>8.0</version.javaee>
-        <version.payara.micro>5.183</version.payara.micro>
+        <version.payara.micro>5.193</version.payara.micro>
         <version.swagger>2.0.0</version.swagger>
         <version.lombok>1.16.16</version.lombok>
+        <version.bcrypt.lib>0.9.0</version.bcrypt.lib>
     </properties>
     
     <dependencies>
@@ -53,9 +54,9 @@
             <version>${version.swagger}</version>
         </dependency>
         <dependency>
-            <groupId>org.mindrot.bcrypt</groupId>
+            <groupId>at.favre.lib</groupId>
             <artifactId>bcrypt</artifactId>
-            <version>0.3</version>
+            <version>${version.bcrypt.lib}</version>
         </dependency>
         <dependency>
             <groupId>com.github.javafaker</groupId>
@@ -104,10 +105,4 @@
             </plugin>
         </plugins>
     </build>
-    <repositories>
-        <repository>
-            <id>bedatadriven</id>
-            <url>https://nexus.bedatadriven.com/content/repositories/public/</url>
-        </repository>
-    </repositories>
 </project>
