@@ -1,4 +1,4 @@
-package me.iolsh.application;
+package me.iolsh;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;

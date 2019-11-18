@@ -2,6 +2,8 @@ package me.iolsh.application.security;
 
 import io.jsonwebtoken.Jwts;
 import me.iolsh.exceptions.RestExceptionTemplate;
+import org.eclipse.microprofile.metrics.Counter;
+import org.eclipse.microprofile.metrics.annotation.Metric;
 
 import javax.annotation.Priority;
 import javax.inject.Inject;
@@ -27,6 +29,11 @@ public class SecurityFilter implements ContainerRequestFilter {
     @Inject
     Security security;
 
+    @Inject
+    @Metric
+    Counter failedAuthorizationAttempts;
+
+
     @Override
     public void filter(ContainerRequestContext requestContext) throws IOException {
         String authHeader = requestContext.getHeaderString(HttpHeaders.AUTHORIZATION);
@@ -38,6 +45,7 @@ public class SecurityFilter implements ContainerRequestFilter {
         try {
             Jwts.parser().setSigningKey(key).parseClaimsJws(token);
         } catch (Exception e) {
+            failedAuthorizationAttempts.inc();
             requestContext.abortWith(Response.status(Response.Status.FORBIDDEN).
                 entity(new RestExceptionTemplate(ERR_MSG, SOLUTION)).build());
         }

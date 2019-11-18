@@ -9,7 +9,6 @@ mvn clean package payara-micro:start
 * https://www.devwithimagination.com/2019/09/03/integration-testing-with-payara-micro/?utm_content=100156467&utm_medium=social&utm_source=twitter&hss_channel=tw-2599580401
 * http://arquillian.org/guides/
 * https://github.com/javaee-samples/javaee8-samples
-* https://www.dropwizard.io/en/stable/
 
 
 

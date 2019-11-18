@@ -13,7 +13,7 @@
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <version.javaee>8.0</version.javaee>
-        <version.payara.micro>5.193</version.payara.micro>
+        <version.payara.micro>5.193.1</version.payara.micro>
         <version.swagger>2.0.0</version.swagger>
         <version.lombok>1.16.16</version.lombok>
         <version.faker>0.16</version.faker>
@@ -23,6 +23,18 @@
         <version.java.target>1.8</version.java.target>
         <version.maven.compiler>3.5.1</version.maven.compiler>
     </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.jboss.arquillian</groupId>
+                <artifactId>arquillian-bom</artifactId>
+                <version>1.5.0.Final</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
         <dependency>
@@ -73,8 +85,39 @@
             <artifactId>mapstruct</artifactId>
             <version>${version.org.mapstruct}</version>
         </dependency>
+        <dependency>
+            <groupId>org.eclipse.microprofile</groupId>
+            <artifactId>microprofile</artifactId>
+            <type>pom</type>
+            <version>3.2</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- test -->
+        <dependency>
+            <groupId>org.jboss.arquillian.junit</groupId>
+            <artifactId>arquillian-junit-container</artifactId>
+            <version>1.5.0.Final</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>fish.payara.arquillian</groupId>
+            <artifactId>arquillian-payara-server-embedded</artifactId>
+            <version>1.2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>fish.payara.extras</groupId>
+            <artifactId>payara-embedded-all</artifactId>
+            <version>${version.payara.micro}</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
-
     <build>
         <finalName>${name}</finalName>
         <plugins>
