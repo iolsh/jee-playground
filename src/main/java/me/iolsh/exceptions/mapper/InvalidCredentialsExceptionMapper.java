@@ -10,8 +10,8 @@ import javax.ws.rs.ext.Provider;
 @Provider
 public class InvalidCredentialsExceptionMapper implements ExceptionMapper<InvalidCredentialsException> {
 
-    final String MSG = "Invalid credentials.";
-    final String SOLUTION = "Either register or provide valid user/password.";
+    private static final String MSG = "Invalid credentials.";
+    private static final String SOLUTION = "Either register or provide valid user/password.";
 
     @Override
     public Response toResponse(InvalidCredentialsException exception) {

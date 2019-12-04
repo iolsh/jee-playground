@@ -10,8 +10,8 @@ import javax.ws.rs.ext.Provider;
 @Provider
 public class UserAlreadyExistsExceptionMapper implements ExceptionMapper<UserAlreadyExistsException> {
 
-    final String MSG = "User already exists.";
-    final String SOLUTION = "Login with valid credentials.";
+    private static final String MSG = "User already exists.";
+    private static final String SOLUTION = "Login with valid credentials.";
 
     @Override
     public Response toResponse(UserAlreadyExistsException exception) {
