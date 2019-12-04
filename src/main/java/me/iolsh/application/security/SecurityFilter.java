@@ -22,9 +22,9 @@ import java.security.Key;
 @Priority(Priorities.AUTHENTICATION)
 public class SecurityFilter implements ContainerRequestFilter {
 
-    private final String BEARER = "Bearer";
-    private final String ERR_MSG = "Token invalid.";
-    private final String SOLUTION = "Provide valid token.";
+    private static final String BEARER = "Bearer";
+    private static final String ERR_MSG = "Token invalid.";
+    private static final String SOLUTION = "Provide valid token.";
 
     @Inject
     Security security;

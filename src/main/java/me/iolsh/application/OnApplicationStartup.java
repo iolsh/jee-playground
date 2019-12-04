@@ -27,7 +27,7 @@ public class OnApplicationStartup {
     }
 
     private void populateBooksInDatabase() {
-        IntStream.range(1,10).mapToObj((i) -> UUID.randomUUID().toString()).forEach(this::createBook);
+        IntStream.range(1,10).mapToObj(i -> UUID.randomUUID().toString()).forEach(this::createBook);
     }
 
     private void createBook(String id) {
