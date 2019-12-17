@@ -7,7 +7,6 @@ import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Optional;
 
-import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.PersistenceContext;
@@ -22,7 +21,6 @@ public abstract class AbstractHibernateRepository<T, ID> {
 
     @PersistenceContext
     private EntityManager entityManager;
-    private Session session;
 
     public AbstractHibernateRepository() {
         Type genericSuperClass = getClass().getGenericSuperclass();
@@ -38,17 +36,12 @@ public abstract class AbstractHibernateRepository<T, ID> {
 
     }
 
-    @PostConstruct
-    private void init() {
-        this.session = entityManager.unwrap(Session.class);
-    }
-
     public List<T> findAll() {
-        CriteriaBuilder cb = session.getCriteriaBuilder();
+        CriteriaBuilder cb = getSession().getCriteriaBuilder();
         CriteriaQuery<T> cq = cb.createQuery(persistentClass);
         Root<T> rootEntry = cq.from(persistentClass);
         CriteriaQuery<T> all = cq.select(rootEntry);
-        TypedQuery<T> allQuery = session.createQuery(all);
+        TypedQuery<T> allQuery = getSession().createQuery(all);
         return allQuery.getResultList();
     }
 
@@ -70,6 +63,10 @@ public abstract class AbstractHibernateRepository<T, ID> {
 
     protected TypedQuery<T> getNamedQuery(String query) {
         return entityManager.createNamedQuery(query, persistentClass);
+    }
+
+    private Session getSession() {
+        return entityManager.unwrap(Session.class);
     }
 
 }

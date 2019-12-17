@@ -6,7 +6,6 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.transaction.Transactional;
 import java.util.Optional;
 
-
 import static javax.transaction.Transactional.TxType.REQUIRED;
 
 @ApplicationScoped
