@@ -22,6 +22,8 @@
         <version.java.source>1.8</version.java.source>
         <version.java.target>1.8</version.java.target>
         <version.maven.compiler>3.5.1</version.maven.compiler>
+        <version.hibernate>5.2.10.Final</version.hibernate>
+        <version.h2>1.4.193</version.h2>
     </properties>
 
     <dependencyManagement>
@@ -35,7 +37,6 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
     <dependencies>
         <dependency>
             <groupId>javax</groupId>
@@ -48,6 +49,16 @@
             <artifactId>javaee-api</artifactId>
             <version>8.0</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>${version.hibernate}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>${version.h2}</version>
         </dependency>
         <dependency>
             <groupId>io.jsonwebtoken</groupId>

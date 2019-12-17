@@ -3,13 +3,13 @@ package me.iolsh.api.resources;
 import me.iolsh.api.model.LoginModel;
 import me.iolsh.api.model.UserModel;
 import me.iolsh.entity.User;
+import me.iolsh.exceptions.InvalidCredentialsException;
 import me.iolsh.exceptions.UserAlreadyExistsException;
 import me.iolsh.mappers.UserModelToEntityMapper;
 import me.iolsh.repository.UserRepository;
 import me.iolsh.application.security.Security;
 
 import javax.inject.Inject;
-import javax.persistence.NoResultException;
 import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
@@ -32,21 +32,17 @@ public class SecurityResource {
     @Path("register")
     @Valid
     public Response register(@Valid  UserModel user) {
-        //TODO refactor crap
-        try {
-            userRepository.findUserByUserName(user.getUserName());
-        } catch (NoResultException e) {
-            user.setPassword(security.hash(user.getPassword()));
-            userRepository.create(userModelToEntityMapper.mapUserToEntity(user));
-            return Response.noContent().build();
-        }
-        throw new UserAlreadyExistsException();
+        userRepository.findUserByUserName(user.getUserName()).ifPresent(u -> {throw new UserAlreadyExistsException();});
+        user.setPassword(security.hash(user.getPassword()));
+        userRepository.create(userModelToEntityMapper.mapUserToEntity(user));
+        return Response.noContent().build();
     }
 
     @POST
     @Path("login")
     public Response login(@Valid  LoginModel loginModel) {
-        User user = userRepository.getRegisteredUserByUserName(loginModel.getUserName());
+        User user = userRepository.findUserByUserName(loginModel.getUserName())
+            .orElseThrow(() -> new InvalidCredentialsException());
         String hash = user.getPassword();
         if (security.verifyPassword(loginModel.getPassword(), hash)) {
             String token = security.createToken(user, Security.TOKEN_VALIDITY, uriInfo);

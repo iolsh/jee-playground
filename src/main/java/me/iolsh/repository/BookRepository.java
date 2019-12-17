@@ -13,17 +13,6 @@ import static javax.transaction.Transactional.TxType.REQUIRED;
 
 @ApplicationScoped
 @Transactional(REQUIRED)
-public class BookRepository {
-
-    @PersistenceContext
-    private EntityManager entityManager;
-
-    public void create(final Book book) {
-        entityManager.persist(book);
-    }
-
-    public List<Book> findAll() {
-        return entityManager.createQuery("SELECT b FROM Book b", Book.class).getResultList();
-    }
+public class BookRepository extends AbstractHibernateRepository<Book, String> {
 
 }

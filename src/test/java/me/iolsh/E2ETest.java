@@ -9,16 +9,20 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.io.File;
+
 @RunWith(Arquillian.class)
 public class E2ETest {
+
+    private static final String WEBAPP_SRC = "src/main/webapp";
 
     @Deployment
     public static WebArchive createDeployment() {
         return ShrinkWrap.create(WebArchive.class)
-                .addPackages(true, Filters.exclude(".*Test.*"),
-                        ApplicationServices.class.getPackage())
-                .addAsResource("META-INF/persistence.xml")
-        .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
+            .addPackages(true, Filters.exclude(".*Test.*"), ApplicationServices.class.getPackage())
+            .addAsWebInfResource(new File(WEBAPP_SRC, "WEB-INF/glassfish-resources.xml"))
+            .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
+            .addAsResource("META-INF/persistence.xml");
     }
 
     @Test
