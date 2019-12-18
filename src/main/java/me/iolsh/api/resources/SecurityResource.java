@@ -42,7 +42,7 @@ public class SecurityResource {
     @Path("login")
     public Response login(@Valid  LoginModel loginModel) {
         User user = userRepository.findUserByUserName(loginModel.getUserName())
-            .orElseThrow(() -> new InvalidCredentialsException());
+            .orElseThrow(InvalidCredentialsException::new);
         String hash = user.getPassword();
         if (security.verifyPassword(loginModel.getPassword(), hash)) {
             String token = security.createToken(user, Security.TOKEN_VALIDITY, uriInfo);

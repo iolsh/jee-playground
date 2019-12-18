@@ -15,7 +15,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-public abstract class AbstractHibernateRepository<T, ID> {
+public abstract class AbstractHibernateRepository<T, I> {
 
     private final Class<T> persistentClass;
 
@@ -46,12 +46,12 @@ public abstract class AbstractHibernateRepository<T, ID> {
     }
 
 
-    public Optional<T> findById(ID id) {
+    public Optional<T> findById(I id) {
         T entity = entityManager.find(persistentClass, id);
-        return Optional.empty();
+        return Optional.ofNullable(entity);
     }
 
-    public T getOne(ID id) {
+    public T getOne(I id) {
         return findById(id).orElseThrow(() ->
                 new EntityNotFoundException(String.format("Entity %s with id % has not been found.",
                         persistentClass.getName(), id)));
