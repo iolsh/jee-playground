@@ -21,9 +21,9 @@ public class Config {
     }
 
     @Produces
-     public Logger getLogger(InjectionPoint injectionPoint) {
+    public Logger getLogger(final InjectionPoint injectionPoint) {
         return Logger.getLogger(injectionPoint.getMember().getDeclaringClass().getName());
-     }
+    }
 
     @Provider  //TODO check if works here
     public static class JsonbConfigurator implements ContextResolver<Jsonb> {
