@@ -3,6 +3,8 @@ package me.iolsh.application.config;
 import com.rabbitmq.client.ConnectionFactory;
 import com.zanox.rabbiteasy.SingleConnectionFactory;
 import com.zanox.rabbiteasy.consumer.ConsumerContainer;
+import com.zanox.rabbiteasy.publisher.ConfirmedPublisher;
+import com.zanox.rabbiteasy.publisher.MessagePublisher;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import javax.enterprise.inject.Produces;
@@ -47,6 +49,11 @@ public class RabbitMqConfig {
     @Produces
     private ConsumerContainer consumerContainer() {
         return new ConsumerContainer(singleConnectionFactory());
+    }
+
+    @Produces
+    public MessagePublisher publisher() {
+       return new ConfirmedPublisher(singleConnectionFactory());
     }
 
 

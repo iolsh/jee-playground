@@ -2,14 +2,13 @@ package me.iolsh.application;
 
 import com.github.javafaker.Faker;
 import me.iolsh.application.messaging.LogMessageConsumer;
-import me.iolsh.application.messaging.PlaygroundMessageProducer;
+import me.iolsh.application.messaging.TickMessageProducer;
 import me.iolsh.entity.Book;
 import me.iolsh.repository.BookRepository;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import javax.annotation.PostConstruct;
-import javax.ejb.Singleton;
-import javax.ejb.Startup;
+import javax.ejb.*;
 import javax.inject.Inject;
 import java.util.UUID;
 import java.util.stream.IntStream;
@@ -25,10 +24,10 @@ public class OnApplicationStartup {
     private BookRepository bookRepository;
 
     @Inject
-    private PlaygroundMessageProducer playgroundMessageProducer;
+    private LogMessageConsumer logMessageConsumer;
 
     @Inject
-    private LogMessageConsumer logMessageConsumer;
+    private TickMessageProducer tickMessageProducer;
 
     @Inject
     @ConfigProperty(name = "rabbitmq.queue")
@@ -37,9 +36,15 @@ public class OnApplicationStartup {
     @PostConstruct
     public void init() {
         populateBooksInDatabase();
-        playgroundMessageProducer.message("App started!!!");
         logMessageConsumer.start(queueName);
     }
+
+    @Lock(LockType.READ)
+    @Schedule(second = "*/20", minute = "*", hour = "*", persistent = false)
+    public void tickMessage() {
+        tickMessageProducer.tick();
+    }
+
 
     private void populateBooksInDatabase() {
         IntStream.range(1,10).mapToObj(i -> UUID.randomUUID().toString()).forEach(this::createBook);
