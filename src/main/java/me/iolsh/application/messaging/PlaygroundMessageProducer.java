@@ -23,12 +23,10 @@ public class PlaygroundMessageProducer {
     ConnectionFactory factory;
 
     public void message(String message)  {
-        try (
-            Connection connection = factory.newConnection();
-            Channel channel = connection.createChannel()) {
+        try (Connection connection = factory.newConnection(); Channel channel = connection.createChannel()) {
             channel.exchangeDeclare(EXCHANGE_NAME, EXCHANGE_TYPE, true);
             channel.basicPublish(EXCHANGE_NAME, "", null, message.getBytes("UTF-8"));
-            logger.info(" [x] Sent '" + message + "'");
+            logger.info("[x] Sent: {}", message);
         } catch (Exception e) {
             logger.error("Unable to deliver message {}", e);
         }

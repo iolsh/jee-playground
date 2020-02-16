@@ -24,6 +24,8 @@
         <version.maven.compiler>3.5.1</version.maven.compiler>
         <version.hibernate>5.2.10.Final</version.hibernate>
         <version.h2>1.4.193</version.h2>
+        <version.rabbit.amqp.client>5.8.0</version.rabbit.amqp.client>
+        <version.log4j>2.13.0</version.log4j>
     </properties>
 
     <dependencyManagement>
@@ -99,7 +101,22 @@
         <dependency>
             <groupId>com.rabbitmq</groupId>
             <artifactId>amqp-client</artifactId>
-            <version>5.8.0</version>
+            <version>${version.rabbit.amqp.client}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>${version.log4j}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${version.log4j}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+            <version>${version.log4j}</version>
         </dependency>
         <dependency>
             <groupId>org.eclipse.microprofile</groupId>

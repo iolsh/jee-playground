@@ -1,6 +1,7 @@
 package me.iolsh.application;
 
 import com.github.javafaker.Faker;
+import me.iolsh.application.messaging.PlaygroundMessageConsumer;
 import me.iolsh.application.messaging.PlaygroundMessageProducer;
 import me.iolsh.entity.Book;
 import me.iolsh.repository.BookRepository;
@@ -25,10 +26,14 @@ public class OnApplicationStartup {
     @Inject
     private PlaygroundMessageProducer playgroundMessageProducer;
 
+    @Inject
+    private PlaygroundMessageConsumer playgroundMessageConsumer;
+
     @PostConstruct
     public void init() {
         populateBooksInDatabase();
         playgroundMessageProducer.message("App started!!!");
+        playgroundMessageConsumer.consume();
     }
 
     private void populateBooksInDatabase() {
