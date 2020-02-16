@@ -1,4 +1,4 @@
-package me.iolsh.application.messaging;
+package me.iolsh.messaging;
 
 import com.zanox.rabbiteasy.Message;
 import com.zanox.rabbiteasy.publisher.MessagePublisher;

@@ -1,8 +1,8 @@
 package me.iolsh.application;
 
 import com.github.javafaker.Faker;
-import me.iolsh.application.messaging.LogMessageConsumer;
-import me.iolsh.application.messaging.TickMessageProducer;
+import me.iolsh.messaging.LogMessageConsumer;
+import me.iolsh.messaging.TickMessageProducer;
 import me.iolsh.entity.Book;
 import me.iolsh.repository.BookRepository;
 import org.eclipse.microprofile.config.inject.ConfigProperty;

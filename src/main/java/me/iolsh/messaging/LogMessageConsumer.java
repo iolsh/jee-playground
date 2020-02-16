@@ -1,4 +1,4 @@
-package me.iolsh.application.messaging;
+package me.iolsh.messaging;
 
 import com.zanox.rabbiteasy.Message;
 import com.zanox.rabbiteasy.consumer.ConsumerContainer;
@@ -19,10 +19,10 @@ public class LogMessageConsumer extends MessageConsumer {
     @Override
     public void handleMessage(Message message) {
         logger.info("[√] Got new message: {}", message.getBodyAs(String.class));
-        logger.debug("RoutingKey tag: {}", message.getRoutingKey());
+        logger.info("Properties: {}", message.getBasicProperties());
+        logger.debug("Routing key: {}", message.getRoutingKey());
         logger.debug("Delivery tag: {}", message.getDeliveryTag());
         logger.debug("Exchange: {}", message.getExchange());
-        logger.debug("Properties: {}", message.getBasicProperties());
     }
 
     public void start(String queueName) {
