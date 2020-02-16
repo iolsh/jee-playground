@@ -104,6 +104,11 @@
             <version>${version.rabbit.amqp.client}</version>
         </dependency>
         <dependency>
+            <groupId>com.zanox.lib.rabbiteasy</groupId>
+            <artifactId>rabbiteasy-core</artifactId>
+            <version>1.2.0</version>
+        </dependency>
+        <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>
             <version>${version.log4j}</version>

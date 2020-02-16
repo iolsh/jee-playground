@@ -1,12 +1,15 @@
 package me.iolsh.application.config;
 
 import com.rabbitmq.client.ConnectionFactory;
+import com.zanox.rabbiteasy.SingleConnectionFactory;
+import com.zanox.rabbiteasy.consumer.ConsumerContainer;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
+import javax.inject.Named;
 
-public class RabbitMqConnectionFactory {
+public class RabbitMqConfig {
 
     @Inject
     @ConfigProperty(name = "rabbitmq.host")
@@ -21,7 +24,7 @@ public class RabbitMqConnectionFactory {
     @ConfigProperty(name = "rabbitmq.password")
     private String password;
 
-    @Produces
+    @Produces @Named("connectionFactory")
     public ConnectionFactory connectionFactory() {
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost(host);
@@ -30,5 +33,24 @@ public class RabbitMqConnectionFactory {
         factory.setPassword(password);
         return factory;
     }
+
+    @Produces @Named("singleConnectionFactory")
+    public ConnectionFactory singleConnectionFactory() {
+        ConnectionFactory factory = new SingleConnectionFactory();
+        factory.setHost(host);
+        factory.setPort(port);
+        factory.setUsername(user);
+        factory.setPassword(password);
+        return factory;
+    }
+
+    @Produces
+    private ConsumerContainer consumerContainer() {
+        return new ConsumerContainer(singleConnectionFactory());
+    }
+
+
+
+
 
 }

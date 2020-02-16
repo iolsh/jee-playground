@@ -1,10 +1,11 @@
 package me.iolsh.application;
 
 import com.github.javafaker.Faker;
-import me.iolsh.application.messaging.PlaygroundMessageConsumer;
+import me.iolsh.application.messaging.LogMessageConsumer;
 import me.iolsh.application.messaging.PlaygroundMessageProducer;
 import me.iolsh.entity.Book;
 import me.iolsh.repository.BookRepository;
+import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
@@ -27,13 +28,17 @@ public class OnApplicationStartup {
     private PlaygroundMessageProducer playgroundMessageProducer;
 
     @Inject
-    private PlaygroundMessageConsumer playgroundMessageConsumer;
+    private LogMessageConsumer logMessageConsumer;
+
+    @Inject
+    @ConfigProperty(name = "rabbitmq.queue")
+    private String queueName;
 
     @PostConstruct
     public void init() {
         populateBooksInDatabase();
         playgroundMessageProducer.message("App started!!!");
-        playgroundMessageConsumer.consume();
+        logMessageConsumer.start(queueName);
     }
 
     private void populateBooksInDatabase() {

@@ -7,7 +7,7 @@ import org.slf4j.Logger;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-
+import javax.inject.Named;
 
 
 @ApplicationScoped
@@ -19,7 +19,7 @@ public class PlaygroundMessageProducer {
     @Inject
     Logger logger;
 
-    @Inject
+    @Inject @Named("connectionFactory")
     ConnectionFactory factory;
 
     public void message(String message)  {
