@@ -40,7 +40,7 @@ public class OnApplicationStartup {
     }
 
     @Lock(LockType.READ)
-    @Schedule(second = "*/20", minute = "*", hour = "*", persistent = false)
+    @Schedule(minute = "*/1", hour = "*", persistent = false)
     public void tickMessage() {
         tickMessageProducer.tick();
     }

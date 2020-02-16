@@ -13,6 +13,8 @@ import javax.inject.Named;
 
 public class RabbitMqConfig {
 
+    public static final String DEFAULT_FANOUT_EXCHANGE= "amq.fanout";
+
     @Inject
     @ConfigProperty(name = "rabbitmq.host")
     private String host;

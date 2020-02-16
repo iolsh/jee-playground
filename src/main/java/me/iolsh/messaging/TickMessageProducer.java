@@ -8,9 +8,9 @@ import javax.inject.Inject;
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class TickMessageProducer {
+import static me.iolsh.application.config.RabbitMqConfig.DEFAULT_FANOUT_EXCHANGE;
 
-    private static final String EXCHANGE_NAME = "playground.fanout";
+public class TickMessageProducer {
 
     private AtomicInteger counter = new AtomicInteger();
 
@@ -21,7 +21,7 @@ public class TickMessageProducer {
     MessagePublisher publisher;
 
     public void tick() {
-        Message message = new Message().exchange(EXCHANGE_NAME).body("Tick: " + counter.getAndIncrement());
+        Message message = new Message().exchange(DEFAULT_FANOUT_EXCHANGE).body("Tick: " + counter.getAndIncrement());
         try {
             publisher.publish(message);
             publisher.close();
