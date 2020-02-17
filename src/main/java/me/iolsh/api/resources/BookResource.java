@@ -19,10 +19,14 @@ import java.util.stream.Collectors;
 @Secure
 public class BookResource {
 
-    @Inject
     private BookRepository bookRepository;
-    @Inject
     private EntityToBookModelMapper entityToBookModelMapper;
+
+    @Inject
+    public BookResource(BookRepository bookRepository, EntityToBookModelMapper entityToBookModelMapper) {
+        this.bookRepository = bookRepository;
+        this.entityToBookModelMapper = entityToBookModelMapper;
+    }
 
     @GET
     public Response getBooks() {

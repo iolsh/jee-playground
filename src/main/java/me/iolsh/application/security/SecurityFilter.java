@@ -27,11 +27,11 @@ public class SecurityFilter implements ContainerRequestFilter {
     private static final String SOLUTION = "Provide valid token.";
 
     @Inject
-    Security security;
+    private Security security;
 
     @Inject
     @Metric
-    Counter failedAuthorizationAttempts;
+    private Counter failedAuthorizationAttempts;
 
 
     @Override

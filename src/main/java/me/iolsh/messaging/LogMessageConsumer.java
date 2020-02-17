@@ -11,11 +11,14 @@ import java.io.IOException;
 
 public class LogMessageConsumer extends MessageConsumer {
 
-    @Inject
-    Logger logger;
+    private Logger logger;
+    private ConsumerContainer consumerContainer;
 
-    @Inject @Container
-    ConsumerContainer consumerContainer;
+    @Inject
+    public LogMessageConsumer(Logger logger, @Container ConsumerContainer consumerContainer) {
+        this.logger = logger;
+        this.consumerContainer = consumerContainer;
+    }
 
     @Override
     public void handleMessage(Message message) {

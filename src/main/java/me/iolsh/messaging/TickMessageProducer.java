@@ -15,11 +15,14 @@ public class TickMessageProducer {
 
     private AtomicInteger counter = new AtomicInteger();
 
-    @Inject
-    Logger logger;
+    private Logger logger;
+    private MessagePublisher publisher;
 
-    @Inject @Publisher
-    MessagePublisher publisher;
+    @Inject
+    public TickMessageProducer(Logger logger, @Publisher MessagePublisher publisher) {
+        this.logger = logger;
+        this.publisher = publisher;
+    }
 
     public void tick() {
         Message message = new Message().exchange(DEFAULT_FANOUT_EXCHANGE).body("Tick: " + counter.getAndIncrement());
