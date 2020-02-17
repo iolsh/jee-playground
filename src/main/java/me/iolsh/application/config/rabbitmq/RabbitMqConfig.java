@@ -12,7 +12,6 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Disposes;
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
-import java.io.IOException;
 
 @ApplicationScoped
 public class RabbitMqConfig {
@@ -64,7 +63,7 @@ public class RabbitMqConfig {
     @Produces @Publisher
     public MessagePublisher publisher() {
        logger.info("Creating new ConfirmedPublisher...");
-       return new ConfirmedPublisher(singleConnectionFactory());
+       return new ConfirmedPublisher(connectionFactory());
     }
 
     public void disableConsumerContainer(@Disposes @Container ConsumerContainer consumerContainer) {
@@ -72,12 +71,7 @@ public class RabbitMqConfig {
         consumerContainer.stopAllConsumers();
     }
 
-    public void closePublisher(@Disposes @Publisher MessagePublisher messagePublisher) {
-        try {
-            logger.info("Closing MessagePublisher...");
-            messagePublisher.close();
-        } catch (IOException e) {
-            logger.error("Unable to close MessagePublisher {}", e);
-        }
+    public void disposePublisher(@Disposes @Publisher MessagePublisher messagePublisher) {
+        logger.info("Exiting MessagePublisher... Nothing to clean up...");
     }
 }
