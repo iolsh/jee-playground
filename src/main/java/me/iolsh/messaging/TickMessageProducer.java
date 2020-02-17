@@ -2,13 +2,14 @@ package me.iolsh.messaging;
 
 import com.zanox.rabbiteasy.Message;
 import com.zanox.rabbiteasy.publisher.MessagePublisher;
+import me.iolsh.application.config.rabbitmq.Publisher;
 import org.slf4j.Logger;
 
 import javax.inject.Inject;
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import static me.iolsh.application.config.RabbitMqConfig.DEFAULT_FANOUT_EXCHANGE;
+import static me.iolsh.application.config.rabbitmq.RabbitMqConfig.DEFAULT_FANOUT_EXCHANGE;
 
 public class TickMessageProducer {
 
@@ -17,7 +18,7 @@ public class TickMessageProducer {
     @Inject
     Logger logger;
 
-    @Inject
+    @Inject @Publisher
     MessagePublisher publisher;
 
     public void tick() {

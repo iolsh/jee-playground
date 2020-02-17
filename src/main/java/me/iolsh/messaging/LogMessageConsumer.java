@@ -3,6 +3,7 @@ package me.iolsh.messaging;
 import com.zanox.rabbiteasy.Message;
 import com.zanox.rabbiteasy.consumer.ConsumerContainer;
 import com.zanox.rabbiteasy.consumer.MessageConsumer;
+import me.iolsh.application.config.rabbitmq.Container;
 import org.slf4j.Logger;
 
 import javax.inject.Inject;
@@ -13,7 +14,7 @@ public class LogMessageConsumer extends MessageConsumer {
     @Inject
     Logger logger;
 
-    @Inject
+    @Inject @Container
     ConsumerContainer consumerContainer;
 
     @Override
