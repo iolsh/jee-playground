@@ -19,8 +19,8 @@ import java.util.stream.Collectors;
 @Secure
 public class BookResource {
 
-    private BookRepository bookRepository;
-    private EntityToBookModelMapper entityToBookModelMapper;
+    private final BookRepository bookRepository;
+    private final EntityToBookModelMapper entityToBookModelMapper;
 
     @Inject
     public BookResource(BookRepository bookRepository, EntityToBookModelMapper entityToBookModelMapper) {

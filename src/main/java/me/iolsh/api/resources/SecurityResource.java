@@ -21,12 +21,18 @@ public class SecurityResource {
 
     @Context
     private UriInfo uriInfo;
+
+    private final UserRepository userRepository;
+    private final Security security;
+    private final UserModelToEntityMapper userModelToEntityMapper;
+
     @Inject
-    private UserRepository userRepository;
-    @Inject
-    private Security security;
-    @Inject
-    private UserModelToEntityMapper userModelToEntityMapper;
+    public SecurityResource(UserRepository userRepository, Security security,
+        UserModelToEntityMapper userModelToEntityMapper) {
+        this.userRepository = userRepository;
+        this.security = security;
+        this.userModelToEntityMapper = userModelToEntityMapper;
+    }
 
     @POST
     @Path("register")

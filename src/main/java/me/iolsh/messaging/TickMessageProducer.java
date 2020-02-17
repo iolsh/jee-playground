@@ -15,8 +15,8 @@ public class TickMessageProducer {
 
     private AtomicInteger counter = new AtomicInteger();
 
-    private Logger logger;
-    private MessagePublisher publisher;
+    private final Logger logger;
+    private final MessagePublisher publisher;
 
     @Inject
     public TickMessageProducer(Logger logger, @Publisher MessagePublisher publisher) {

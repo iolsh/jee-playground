@@ -11,8 +11,8 @@ import java.io.IOException;
 
 public class LogMessageConsumer extends MessageConsumer {
 
-    private Logger logger;
-    private ConsumerContainer consumerContainer;
+    private final Logger logger;
+    private final ConsumerContainer consumerContainer;
 
     @Inject
     public LogMessageConsumer(Logger logger, @Container ConsumerContainer consumerContainer) {
