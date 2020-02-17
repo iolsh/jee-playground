@@ -4,6 +4,7 @@ import com.github.javafaker.Faker;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.InjectionPoint;
 import javax.json.bind.Jsonb;
@@ -12,6 +13,7 @@ import javax.json.bind.JsonbConfig;
 import javax.ws.rs.ext.ContextResolver;
 import javax.ws.rs.ext.Provider;
 
+@ApplicationScoped
 public class Config {
 
     @Produces
