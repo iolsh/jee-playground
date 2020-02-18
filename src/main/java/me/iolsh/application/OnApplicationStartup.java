@@ -10,7 +10,6 @@ import org.eclipse.microprofile.config.inject.ConfigProperty;
 import javax.annotation.PostConstruct;
 import javax.ejb.*;
 import javax.inject.Inject;
-import java.util.UUID;
 import java.util.stream.IntStream;
 
 @Startup
@@ -45,12 +44,11 @@ public class OnApplicationStartup {
         tickMessageProducer.tick();
     }
 
-
     private void populateBooksInDatabase() {
-        IntStream.range(1,10).forEach(this::createBook);
+        IntStream.range(1,10).forEach(i -> createBook());
     }
 
-    private void createBook(int i) { //TODO check how to get rid of r
+    private void createBook() {
         bookRepository.create(randomBook());
     }
     
