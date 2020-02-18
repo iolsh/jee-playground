@@ -36,7 +36,6 @@ public class SecurityResource {
 
     @POST
     @Path("register")
-    @Valid
     public Response register(@Valid  UserModel user) {
         userRepository.findUserByUserName(user.getUserName()).ifPresent(u -> {throw new UserAlreadyExistsException();});
         user.setPassword(security.hash(user.getPassword()));

@@ -5,8 +5,7 @@ import me.iolsh.entity.Book;
 import org.mapstruct.Mapper;
 
 @Mapper
-public interface EntityToBookModelMapper {
-
+public interface BookMapper {
     BookModel mapEntityToBook(Book book);
-
+    Book mapBookToEntity(BookModel model);
 }

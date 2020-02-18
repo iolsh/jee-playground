@@ -47,16 +47,15 @@ public class OnApplicationStartup {
 
 
     private void populateBooksInDatabase() {
-        IntStream.range(1,10).mapToObj(i -> UUID.randomUUID().toString()).forEach(this::createBook);
+        IntStream.range(1,10).forEach(this::createBook);
     }
 
-    private void createBook(String id) {
-        bookRepository.create(randomBook(id));
+    private void createBook(int i) { //TODO check how to get rid of r
+        bookRepository.create(randomBook());
     }
     
-    private Book randomBook(String id) {
+    private Book randomBook() {
         return Book.builder()
-                .id(id)
                 .author(faker.book().author())
                 .title(faker.book().title())
                 .genre(faker.book().genre())
