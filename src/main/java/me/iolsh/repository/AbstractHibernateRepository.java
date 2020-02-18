@@ -7,6 +7,8 @@ import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Optional;
 
+import javax.enterprise.event.Event;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.PersistenceContext;
@@ -21,6 +23,9 @@ public abstract class AbstractHibernateRepository<T, I> {
 
     @PersistenceContext
     private EntityManager entityManager;
+
+    @Inject
+    private Event<T> entityCreatedEvent;
 
     public AbstractHibernateRepository() {
         Type genericSuperClass = getClass().getGenericSuperclass();
@@ -59,6 +64,7 @@ public abstract class AbstractHibernateRepository<T, I> {
 
     public void create(T entity) {
         entityManager.persist(entity);
+        entityCreatedEvent.fire(entity);
     }
 
     protected TypedQuery<T> getNamedQuery(String query) {

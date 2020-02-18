@@ -12,6 +12,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Disposes;
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
+import java.io.IOException;
 
 @ApplicationScoped
 public class RabbitMqConfig {
@@ -34,8 +35,8 @@ public class RabbitMqConfig {
     private String password;
 
 
-    @Produces @DefaultConnectionFactory
-    public ConnectionFactory connectionFactory() {
+    @Produces @VolatileConnectionFactory
+    public ConnectionFactory volatileConnectionFactory() {
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost(host);
         factory.setPort(port);
@@ -44,8 +45,8 @@ public class RabbitMqConfig {
         return factory;
     }
 
-    @Produces @OneConnectionFactory
-    public ConnectionFactory singleConnectionFactory() {
+    @Produces @DurableConnectionFactory
+    public ConnectionFactory durableConnectionFactory() {
         ConnectionFactory factory = new SingleConnectionFactory();
         factory.setHost(host);
         factory.setPort(port);
@@ -57,13 +58,13 @@ public class RabbitMqConfig {
     @Produces @Container
     public ConsumerContainer consumerContainer() {
         logger.info("Creating new ConsumerContainer...");
-        return new ConsumerContainer(singleConnectionFactory());
+        return new ConsumerContainer(durableConnectionFactory());
     }
 
     @Produces @Publisher
     public MessagePublisher publisher() {
        logger.info("Creating new ConfirmedPublisher...");
-       return new ConfirmedPublisher(connectionFactory());
+       return new ConfirmedPublisher(volatileConnectionFactory());
     }
 
     public void disableConsumerContainer(@Disposes @Container ConsumerContainer consumerContainer) {
@@ -72,6 +73,11 @@ public class RabbitMqConfig {
     }
 
     public void disposePublisher(@Disposes @Publisher MessagePublisher messagePublisher) {
-        logger.info("Exiting MessagePublisher... Nothing to clean up...");
+        try {
+            messagePublisher.close();
+            logger.info("Exiting MessagePublisher...");
+        } catch (IOException e) {
+            logger.error("Unable to close Publisher {}", e);
+        }
     }
 }

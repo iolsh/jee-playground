@@ -28,7 +28,6 @@ public class TickMessageProducer {
         Message message = new Message().exchange(DEFAULT_FANOUT_EXCHANGE).body("Tick: " + counter.getAndIncrement());
         try {
             publisher.publish(message);
-            publisher.close();
         } catch (IOException e) {
             logger.error("Unable to publish message, {}", e);
         }
