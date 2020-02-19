@@ -8,4 +8,7 @@
     <interceptors>
         <class>me.iolsh.inerceptors.PerformanceInterceptor</class>
     </interceptors>
+    <decorators>
+        <class>me.iolsh.decorators.OnCreatedDecorator</class>
+    </decorators>
 </beans>
