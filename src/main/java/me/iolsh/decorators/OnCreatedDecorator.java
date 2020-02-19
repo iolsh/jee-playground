@@ -9,12 +9,14 @@ import javax.inject.Inject;
 @Decorator
 public class OnCreatedDecorator<T> implements OnCreated<T> {
 
-    @Inject
-    private AuditService auditService;
+    private final AuditService auditService;
+    private final OnCreated delegate;
 
     @Inject
-    @Delegate
-    private OnCreated<T> delegate;
+    public OnCreatedDecorator(AuditService auditService, @Delegate  OnCreated<T> delegate) {
+        this.auditService = auditService;
+        this.delegate = delegate;
+    }
 
     @Override
     public void create(T entity) {
