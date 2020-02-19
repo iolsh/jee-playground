@@ -1,5 +1,6 @@
 package me.iolsh.repository;
 
+import me.iolsh.decorators.OnCreated;
 import org.hibernate.Session;
 
 import java.lang.reflect.ParameterizedType;
@@ -17,7 +18,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-public abstract class AbstractHibernateRepository<T, I> {
+public abstract class AbstractHibernateRepository<T, I> implements OnCreated<T> {
 
     private final Class<T> persistentClass;
 
