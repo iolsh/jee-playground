@@ -20,32 +20,32 @@ public class JpaConfig {
         this.logger = logger;
     }
 
-    @PersistenceUnit
-    EntityManagerFactory emf;
-
     @PersistenceContext
     EntityManager entityManager;
+
+    @PersistenceUnit
+    EntityManagerFactory entityManagerFactory;
 
     @Produces @ContainerManaged @RequestScoped
     public EntityManager createEntityManager() {
         EntityManager em = this.entityManager;
-        logger.info("Providing container managed EntityManager {} ...", em);
+        logger.debug("Providing container managed EntityManager {} ...", em);
         return em;
     }
 
     @Produces @ApplicationManaged @RequestScoped
     public EntityManager createApplicationManagedEntityManger() {
-        EntityManager em = emf.createEntityManager();
-        logger.info("Providing application managed EntityManager {} ...", em);
+        EntityManager em = entityManagerFactory.createEntityManager();
+        logger.debug("Providing application managed EntityManager {} ...", em);
         return em;
     }
 
-    public void logDisposingCMEM(@Disposes @ContainerManaged EntityManager em) {
+    public void logDisposingEntityManager(@Disposes @ContainerManaged EntityManager em) {
         logger.debug("Disposing container managed EntityManager: {}", em);
     }
 
     public void closeEntityManager(@Disposes @ApplicationManaged EntityManager em) {
-        logger.info("Closing application managed EntityManager: {}", em);
+        logger.debug("Closing application managed EntityManager: {}", em);
         if (em.isOpen()) {
             em.close();
         }
