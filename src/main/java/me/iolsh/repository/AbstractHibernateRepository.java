@@ -1,5 +1,6 @@
 package me.iolsh.repository;
 
+import me.iolsh.application.config.jpa.ContainerManaged;
 import me.iolsh.decorators.OnCreated;
 import org.hibernate.Session;
 
@@ -12,7 +13,6 @@ import javax.enterprise.event.Event;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityNotFoundException;
-import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -22,7 +22,7 @@ public abstract class AbstractHibernateRepository<T, I> implements OnCreated<T> 
 
     private final Class<T> persistentClass;
 
-    @PersistenceContext
+    @Inject @ContainerManaged
     private EntityManager entityManager;
 
     @Inject
