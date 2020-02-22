@@ -63,9 +63,10 @@ public abstract class AbstractHibernateRepository<T, I> implements OnCreated<T> 
                         persistentClass.getName(), id)));
     }
 
-    public void create(T entity) {
+    public T create(T entity) {
         entityManager.persist(entity);
         entityCreatedEvent.fire(entity);
+        return entity;
     }
 
     protected TypedQuery<T> getNamedQuery(String query) {

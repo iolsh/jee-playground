@@ -19,8 +19,9 @@ public class OnCreatedDecorator<T> implements OnCreated<T> {
     }
 
     @Override
-    public void create(T entity) {
+    public T create(T entity) {
         delegate.create(entity);
         auditService.audit(entity);
+        return entity;
     }
 }
