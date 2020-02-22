@@ -7,10 +7,9 @@ import me.iolsh.repository.BookRepository;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
+import javax.ws.rs.container.ResourceContext;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
@@ -23,6 +22,9 @@ public class BookResource {
 
     private final BookRepository bookRepository;
     private final BookMapper bookMapper;
+
+    @Context
+    ResourceContext resourceContext;
 
     @Inject
     public BookResource(BookRepository bookRepository, BookMapper bookMapper) {
@@ -43,5 +45,9 @@ public class BookResource {
         return Response.ok().build();
     }
 
+    @Path("{id}/description")
+    public BookDescriptionResource bookDescription(@PathParam("id") String bookId) {
+        return resourceContext.initResource(new BookDescriptionResource(bookId ));
+    }
 
 }
