@@ -64,7 +64,7 @@ public class RabbitMqConfig {
     @Produces @Publisher
     public MessagePublisher publisher() {
        logger.info("Creating new ConfirmedPublisher...");
-       return new ConfirmedPublisher(volatileConnectionFactory());
+       return new ConfirmedPublisher(durableConnectionFactory());
     }
 
     public void disableConsumerContainer(@Disposes @Container ConsumerContainer consumerContainer) {
