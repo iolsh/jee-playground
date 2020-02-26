@@ -1,5 +1,6 @@
 package me.iolsh.api.resources;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import me.iolsh.api.model.BookModel;
 import me.iolsh.application.security.Secure;
 import me.iolsh.entity.Book;
@@ -21,6 +22,7 @@ import java.util.stream.Collectors;
 @Path("/api/books")
 @Produces(MediaType.APPLICATION_JSON)
 @Secure
+@SecurityRequirement(name = "JWT")
 public class BookResource {
 
     private final BookRepository bookRepository;
