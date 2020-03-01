@@ -1,6 +1,6 @@
 package me.iolsh.infrastructure.jpa;
 
-import me.iolsh.infrastructure.decorators.OnCreated;
+import me.iolsh.audit.control.OnCreated;
 import org.hibernate.Session;
 
 import java.lang.reflect.ParameterizedType;

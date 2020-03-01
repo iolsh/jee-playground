@@ -1,4 +1,4 @@
-package me.iolsh.books;
+package me.iolsh.books.entity;
 
 import me.iolsh.infrastructure.inerceptors.PerformanceMonitor;
 import me.iolsh.infrastructure.jpa.AbstractHibernateRepository;

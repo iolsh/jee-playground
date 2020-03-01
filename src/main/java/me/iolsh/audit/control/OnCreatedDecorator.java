@@ -1,6 +1,4 @@
-package me.iolsh.infrastructure.decorators;
-
-import me.iolsh.audit.AuditService;
+package me.iolsh.audit.control;
 
 import javax.decorator.Decorator;
 import javax.decorator.Delegate;

@@ -1,4 +1,4 @@
-package me.iolsh.books;
+package me.iolsh.books.boundry;
 
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import me.iolsh.infrastructure.security.Secure;

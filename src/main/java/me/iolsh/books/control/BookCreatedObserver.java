@@ -1,7 +1,8 @@
-package me.iolsh.books;
+package me.iolsh.books.control;
 
 import com.zanox.rabbiteasy.Message;
 import com.zanox.rabbiteasy.publisher.MessagePublisher;
+import me.iolsh.books.entity.Book;
 import me.iolsh.infrastructure.rabbitmq.Publisher;
 import org.slf4j.Logger;
 

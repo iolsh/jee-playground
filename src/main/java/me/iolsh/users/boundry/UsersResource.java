@@ -1,4 +1,4 @@
-package me.iolsh.users;
+package me.iolsh.users.boundry;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.headers.Header;
@@ -7,6 +7,9 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import me.iolsh.infrastructure.security.Security;
+import me.iolsh.users.control.UserModelToEntityMapper;
+import me.iolsh.users.entity.User;
+import me.iolsh.users.entity.UserRepository;
 
 import javax.inject.Inject;
 import javax.validation.Valid;

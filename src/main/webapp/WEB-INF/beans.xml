@@ -9,6 +9,6 @@
         <class>me.iolsh.infrastructure.inerceptors.PerformanceInterceptor</class>
     </interceptors>
     <decorators>
-        <class>me.iolsh.infrastructure.decorators.OnCreatedDecorator</class>
+        <class>me.iolsh.audit.control.OnCreatedDecorator</class>
     </decorators>
 </beans>

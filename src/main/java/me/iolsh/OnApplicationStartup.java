@@ -3,8 +3,8 @@ package me.iolsh;
 import com.github.javafaker.Faker;
 import me.iolsh.infrastructure.messaging.LogMessageConsumer;
 import me.iolsh.infrastructure.messaging.TickMessageProducer;
-import me.iolsh.books.Book;
-import me.iolsh.books.BookRepository;
+import me.iolsh.books.entity.Book;
+import me.iolsh.books.entity.BookRepository;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
 import javax.annotation.PostConstruct;

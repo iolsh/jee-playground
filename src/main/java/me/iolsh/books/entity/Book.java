@@ -1,4 +1,4 @@
-package me.iolsh.books;
+package me.iolsh.books.entity;
 
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;

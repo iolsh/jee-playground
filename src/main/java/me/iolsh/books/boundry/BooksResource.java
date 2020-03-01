@@ -1,6 +1,9 @@
-package me.iolsh.books;
+package me.iolsh.books.boundry;
 
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import me.iolsh.books.control.BookMapper;
+import me.iolsh.books.entity.Book;
+import me.iolsh.books.entity.BookRepository;
 import me.iolsh.infrastructure.security.Secure;
 
 import javax.inject.Inject;
@@ -19,7 +22,7 @@ import java.util.stream.Collectors;
 @Produces(MediaType.APPLICATION_JSON)
 @Secure
 @SecurityRequirement(name = "JWT")
-public class BookResource {
+public class BooksResource {
 
     private final BookRepository bookRepository;
     private final BookMapper bookMapper;
@@ -28,7 +31,7 @@ public class BookResource {
     ResourceContext resourceContext;
 
     @Inject
-    public BookResource(BookRepository bookRepository, BookMapper bookMapper) {
+    public BooksResource(BookRepository bookRepository, BookMapper bookMapper) {
         this.bookRepository = bookRepository;
         this.bookMapper = bookMapper;
     }

@@ -1,5 +1,7 @@
-package me.iolsh.users;
+package me.iolsh.users.control;
 
+import me.iolsh.users.boundry.UserModel;
+import me.iolsh.users.entity.User;
 import org.mapstruct.Mapper;
 
 @Mapper

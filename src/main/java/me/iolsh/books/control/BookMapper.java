@@ -1,7 +1,7 @@
-package me.iolsh.books;
+package me.iolsh.books.control;
 
-import me.iolsh.books.BookModel;
-import me.iolsh.books.Book;
+import me.iolsh.books.boundry.BookModel;
+import me.iolsh.books.entity.Book;
 import org.mapstruct.Mapper;
 
 @Mapper

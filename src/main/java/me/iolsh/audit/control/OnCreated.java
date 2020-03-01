@@ -1,4 +1,4 @@
-package me.iolsh.infrastructure.decorators;
+package me.iolsh.audit.control;
 
 public interface OnCreated<T> {
     T create(T entity);

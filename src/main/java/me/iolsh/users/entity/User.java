@@ -1,4 +1,4 @@
-package me.iolsh.users;
+package me.iolsh.users.entity;
 
 import lombok.*;
 import javax.persistence.*;
