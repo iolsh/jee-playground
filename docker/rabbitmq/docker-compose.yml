@@ -1,0 +1,11 @@
+version: '2'
+
+services:
+  rabbitmq:
+    image: 'bitnami/rabbitmq:latest'
+    environment:
+      - RABBITMQ_USERNAME=playground
+      - RABBITMQ_PASSWORD=playground
+    ports:
+      - '15672:15672'
+      - '5672:5672'

@@ -1,5 +1,11 @@
 package me.iolsh.api.resources;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.headers.Header;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import me.iolsh.api.model.LoginModel;
 import me.iolsh.api.model.UserModel;
 import me.iolsh.entity.User;
@@ -36,7 +42,18 @@ public class SecurityResource {
 
     @POST
     @Path("register")
-    public Response register(@Valid  UserModel user) {
+    @Operation(summary = "Register new user.", tags = {"users"},
+        description = "Creates new user in application.",
+        responses = {
+            @ApiResponse(responseCode = "204", description = "User created."),
+            @ApiResponse(responseCode = "400", description = "User already exists.")
+    })
+    public Response register(
+            @RequestBody(description = "New user data.", required = true,
+            content = @Content(
+                schema = @Schema(implementation = UserModel.class)
+            ))
+            @Valid  UserModel user) {
         userRepository.findUserByUserName(user.getUserName()).ifPresent(u -> {throw new UserAlreadyExistsException();});
         user.setPassword(security.hash(user.getPassword()));
         userRepository.create(userModelToEntityMapper.mapUserToEntity(user));
@@ -45,6 +62,15 @@ public class SecurityResource {
 
     @POST
     @Path("login")
+    @Operation(summary = "Authenticate.", tags = {"users"},
+            description = "Authenticates user in application.",
+            responses = {
+                @ApiResponse(responseCode = "200", description = "Authenticated.", headers = {
+                    @Header(name = HttpHeaders.AUTHORIZATION,
+                        description = "JWT token used for authorization against secured resources.")
+                }),
+                @ApiResponse(responseCode = "401", description = "Unauthorized.")
+            })
     public Response login(@Valid  LoginModel loginModel) {
         User user = userRepository.findUserByUserName(loginModel.getUserName())
             .orElseThrow(InvalidCredentialsException::new);
