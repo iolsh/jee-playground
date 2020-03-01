@@ -44,6 +44,8 @@ public class BooksResource {
         return Response.status(Response.Status.OK).entity(books).build();
     }
 
+
+
     @POST
     public Response create(@Valid BookModel book, @Context UriInfo uriInfo) {
         Book entity = bookRepository.create(bookMapper.mapBookToEntity(book));
@@ -51,9 +53,16 @@ public class BooksResource {
         return Response.created(uri).entity(entity).build();
     }
 
+    @GET
+    @Path("{id}")
+    public Response getBook(@PathParam("id") String bookId) {
+        Book book = bookRepository.getOne(bookId);
+        return Response.ok().entity(bookMapper.mapEntityToBook(book)).build();
+    }
+
     @Path("{id}/description")
     public BookDescriptionResource bookDescription(@PathParam("id") String bookId) {
-        return resourceContext.initResource(new BookDescriptionResource(bookId ));
+        return resourceContext.initResource(new BookDescriptionResource(bookId));
     }
 
 }
