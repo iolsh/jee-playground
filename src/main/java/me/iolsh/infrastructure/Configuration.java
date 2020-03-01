@@ -14,7 +14,7 @@ import javax.ws.rs.ext.ContextResolver;
 import javax.ws.rs.ext.Provider;
 
 @ApplicationScoped
-public class Config {
+public class Configuration {
 
     @Produces
     public Faker createFaker() {

@@ -13,7 +13,7 @@ import javax.inject.Inject;
 
 import java.io.IOException;
 
-import static me.iolsh.infrastructure.rabbitmq.RabbitMqConfig.DEFAULT_FANOUT_EXCHANGE;
+import static me.iolsh.infrastructure.rabbitmq.Configuration.DEFAULT_FANOUT_EXCHANGE;
 
 @ApplicationScoped
 public class BookCreatedObserver {

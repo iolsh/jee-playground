@@ -1,4 +1,4 @@
-package me.iolsh.infrastructure.inerceptors;
+package me.iolsh.infrastructure.monitoring;
 
 import org.slf4j.Logger;
 

@@ -11,12 +11,12 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceUnit;
 
-public class JpaConfig {
+public class Configuration {
 
     private final Logger logger;
 
     @Inject
-    public JpaConfig(Logger logger) {
+    public Configuration(Logger logger) {
         this.logger = logger;
     }
 

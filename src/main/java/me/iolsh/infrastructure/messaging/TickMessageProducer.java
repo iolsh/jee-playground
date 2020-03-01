@@ -9,7 +9,7 @@ import javax.inject.Inject;
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import static me.iolsh.infrastructure.rabbitmq.RabbitMqConfig.DEFAULT_FANOUT_EXCHANGE;
+import static me.iolsh.infrastructure.rabbitmq.Configuration.DEFAULT_FANOUT_EXCHANGE;
 
 public class TickMessageProducer {
 

@@ -1,6 +1,6 @@
 package me.iolsh.books.entity;
 
-import me.iolsh.infrastructure.inerceptors.PerformanceMonitor;
+import me.iolsh.infrastructure.monitoring.PerformanceMonitor;
 import me.iolsh.infrastructure.jpa.AbstractHibernateRepository;
 
 import javax.enterprise.context.ApplicationScoped;

@@ -15,7 +15,7 @@ import javax.inject.Inject;
 import java.io.IOException;
 
 @ApplicationScoped
-public class RabbitMqConfig {
+public class Configuration {
 
     public static final String DEFAULT_FANOUT_EXCHANGE= "amq.fanout";
 
