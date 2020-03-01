@@ -8,7 +8,7 @@ import org.eclipse.microprofile.openapi.annotations.info.License;
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
-@ApplicationPath("/")
+@ApplicationPath("/api")
 @OpenAPIDefinition(info = @Info(version = "0.1", title = "Playground application API",
         description = "Playground application is a sandbox to evaluate JEE related concepts. " +
                 "This API provides resources helpful for hacking the code ;). " +

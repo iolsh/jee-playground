@@ -24,7 +24,7 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Path("/api/books")
+@Path("/books")
 @Produces(MediaType.APPLICATION_JSON)
 @Secure
 @SecurityRequirement(name = "JWT")
