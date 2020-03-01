@@ -6,9 +6,9 @@
                       http://xmlns.jcp.org/xml/ns/javaee/beans_1_1.xsd"
         bean-discovery-mode="all">
     <interceptors>
-        <class>me.iolsh.inerceptors.PerformanceInterceptor</class>
+        <class>me.iolsh.infrastructure.monitoring.PerformanceInterceptor</class>
     </interceptors>
     <decorators>
-        <class>me.iolsh.decorators.OnCreatedDecorator</class>
+        <class>me.iolsh.audit.control.OnCreatedDecorator</class>
     </decorators>
 </beans>
