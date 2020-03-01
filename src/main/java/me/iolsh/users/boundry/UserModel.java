@@ -1,9 +1,9 @@
 package me.iolsh.users.boundry;
 
-import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Email;

@@ -1,15 +1,16 @@
 package me.iolsh.users.boundry;
 
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.headers.Header;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import me.iolsh.infrastructure.security.Security;
 import me.iolsh.users.control.UserModelToEntityMapper;
 import me.iolsh.users.entity.User;
 import me.iolsh.users.entity.UserRepository;
+import org.eclipse.microprofile.openapi.annotations.Operation;
+import org.eclipse.microprofile.openapi.annotations.headers.Header;
+import org.eclipse.microprofile.openapi.annotations.media.Content;
+import org.eclipse.microprofile.openapi.annotations.media.Schema;
+import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
@@ -38,12 +39,12 @@ public class UsersResource {
 
     @POST
     @Path("register")
-    @Operation(summary = "Register new user.", tags = {"users"},
-        description = "Creates new user in application.",
-        responses = {
-            @ApiResponse(responseCode = "204", description = "User created."),
-            @ApiResponse(responseCode = "400", description = "User already exists.")
-    })
+    @APIResponses(
+        value = {
+            @APIResponse(responseCode = "204", description = "User created."),
+            @APIResponse(responseCode = "400", description ="User already exists.")
+     })
+    @Operation(summary = "Register new user.", description = "Creates new user in application.")
     public Response register(
             @RequestBody(description = "New user data.", required = true,
             content = @Content(
@@ -58,15 +59,17 @@ public class UsersResource {
 
     @POST
     @Path("login")
-    @Operation(summary = "Authenticate.", tags = {"users"},
-            description = "Authenticates user in application.",
-            responses = {
-                @ApiResponse(responseCode = "200", description = "Authenticated.", headers = {
+    @APIResponses(
+        value = {
+            @APIResponse(responseCode = "200", description = "Authenticated.",
+                headers = {
                     @Header(name = HttpHeaders.AUTHORIZATION,
                         description = "JWT token used for authorization against secured resources.")
                 }),
-                @ApiResponse(responseCode = "401", description = "Unauthorized.")
-            })
+            @APIResponse(responseCode = "401", description ="Unauthorized.")
+        }
+    )
+    @Operation(summary = "Authenticate.", description = "Authenticates user in application.")
     public Response login(@Valid  LoginModel loginModel) {
         User user = userRepository.findUserByUserName(loginModel.getUserName())
             .orElseThrow(InvalidCredentialsException::new);

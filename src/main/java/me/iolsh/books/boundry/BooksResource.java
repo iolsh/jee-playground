@@ -1,10 +1,11 @@
 package me.iolsh.books.boundry;
 
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+
 import me.iolsh.books.control.BookMapper;
 import me.iolsh.books.entity.Book;
 import me.iolsh.books.entity.BookRepository;
 import me.iolsh.infrastructure.security.Secure;
+import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirement;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
