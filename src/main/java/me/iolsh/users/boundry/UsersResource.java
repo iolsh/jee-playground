@@ -17,8 +17,8 @@ import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 
-@Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
 @Path("/users")
 public class UsersResource {
 
@@ -44,7 +44,7 @@ public class UsersResource {
             @APIResponse(responseCode = "204", description = "User created."),
             @APIResponse(responseCode = "400", description ="User already exists.")
      })
-    @Operation(summary = "Register new user.", description = "Creates new user in application.")
+    @Operation(summary = "Register new user.", description = "Creates new user in application.", operationId = "register")
     public Response register(
             @RequestBody(description = "New user data.", required = true,
             content = @Content(

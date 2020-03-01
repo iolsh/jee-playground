@@ -8,9 +8,11 @@ import me.iolsh.infrastructure.security.Secure;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
+import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirement;
+import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
@@ -24,10 +26,12 @@ import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Path("/books")
-@Produces(MediaType.APPLICATION_JSON)
 @Secure
+@Path("/books")
 @SecurityRequirement(name = "JWT")
+@Tag(name = "Books",description = "Books resource")
+@Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
 public class BooksResource {
 
     private final BookRepository bookRepository;
@@ -74,7 +78,7 @@ public class BooksResource {
                                     schema = @Schema(implementation = BookModel.class)))
             })
     @Operation(summary = "Get book.", description = "Get single book.")
-    public Response getBook(@PathParam("id") String bookId) {
+    public Response getBook(@RequestBody @PathParam("id") String bookId) {
         Book book = bookRepository.getOne(bookId);
         return Response.ok().entity(bookMapper.mapEntityToBook(book)).build();
     }
