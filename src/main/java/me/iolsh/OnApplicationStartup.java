@@ -45,13 +45,13 @@ public class OnApplicationStartup {
     }
 
     private void populateBooksInDatabase() {
-        IntStream.range(1,10).forEach(i -> createBook());
+        IntStream.range(1, 10).forEach(i -> createBook());
     }
 
     private void createBook() {
         bookRepository.create(randomBook());
     }
-    
+
     private Book randomBook() {
         return Book.builder()
                 .author(faker.book().author())

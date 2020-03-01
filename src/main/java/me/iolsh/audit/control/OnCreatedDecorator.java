@@ -11,7 +11,7 @@ public class OnCreatedDecorator<T> implements OnCreated<T> {
     private final OnCreated delegate;
 
     @Inject
-    public OnCreatedDecorator(AuditService auditService, @Delegate  OnCreated<T> delegate) {
+    public OnCreatedDecorator(AuditService auditService, @Delegate OnCreated<T> delegate) {
         this.auditService = auditService;
         this.delegate = delegate;
     }

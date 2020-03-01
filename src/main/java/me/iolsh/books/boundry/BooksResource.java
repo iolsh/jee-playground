@@ -29,7 +29,7 @@ import java.util.stream.Collectors;
 @Secure
 @Path("/books")
 @SecurityRequirement(name = "JWT")
-@Tag(name = "Books",description = "Books resource")
+@Tag(name = "Books", description = "Books resource")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class BooksResource {
@@ -59,7 +59,6 @@ public class BooksResource {
                 .collect(Collectors.toList());
         return Response.status(Response.Status.OK).entity(books).build();
     }
-
 
 
     @POST

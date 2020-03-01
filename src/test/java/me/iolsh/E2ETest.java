@@ -19,10 +19,10 @@ public class E2ETest {
     @Deployment
     public static WebArchive createDeployment() {
         return ShrinkWrap.create(WebArchive.class)
-            .addPackages(true, Filters.exclude(".*Test.*"), ApplicationServices.class.getPackage())
-            .addAsWebInfResource(new File(WEBAPP_SRC, "WEB-INF/glassfish-resources.xml"))
-            .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
-            .addAsResource("META-INF/persistence.xml");
+                .addPackages(true, Filters.exclude(".*Test.*"), ApplicationServices.class.getPackage())
+                .addAsWebInfResource(new File(WEBAPP_SRC, "WEB-INF/glassfish-resources.xml"))
+                .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
+                .addAsResource("META-INF/persistence.xml");
     }
 
     @Test

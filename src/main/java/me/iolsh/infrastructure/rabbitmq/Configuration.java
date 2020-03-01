@@ -17,7 +17,7 @@ import java.io.IOException;
 @ApplicationScoped
 public class Configuration {
 
-    public static final String DEFAULT_FANOUT_EXCHANGE= "amq.fanout";
+    public static final String DEFAULT_FANOUT_EXCHANGE = "amq.fanout";
 
     @Inject
     private Logger logger;
@@ -35,7 +35,8 @@ public class Configuration {
     private String password;
 
 
-    @Produces @VolatileConnectionFactory
+    @Produces
+    @VolatileConnectionFactory
     public ConnectionFactory volatileConnectionFactory() {
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost(host);
@@ -45,7 +46,8 @@ public class Configuration {
         return factory;
     }
 
-    @Produces @DurableConnectionFactory
+    @Produces
+    @DurableConnectionFactory
     public ConnectionFactory durableConnectionFactory() {
         ConnectionFactory factory = new SingleConnectionFactory();
         factory.setHost(host);
@@ -55,16 +57,18 @@ public class Configuration {
         return factory;
     }
 
-    @Produces @Container
+    @Produces
+    @Container
     public ConsumerContainer consumerContainer() {
         logger.info("Creating new ConsumerContainer...");
         return new ConsumerContainer(durableConnectionFactory());
     }
 
-    @Produces @Publisher
+    @Produces
+    @Publisher
     public MessagePublisher publisher() {
-       logger.info("Creating new ConfirmedPublisher...");
-       return new ConfirmedPublisher(durableConnectionFactory());
+        logger.info("Creating new ConfirmedPublisher...");
+        return new ConfirmedPublisher(durableConnectionFactory());
     }
 
     public void disableConsumerContainer(@Disposes @Container ConsumerContainer consumerContainer) {

@@ -28,7 +28,7 @@ public class BookCreatedObserver {
     }
 
     public void onBookCreated(@Observes(during = TransactionPhase.AFTER_SUCCESS) Book book) {
-        Message message = new Message().exchange(DEFAULT_FANOUT_EXCHANGE).body("Book created:" + book );
+        Message message = new Message().exchange(DEFAULT_FANOUT_EXCHANGE).body("Book created:" + book);
         try {
             publisher.publish(message);
         } catch (IOException e) {

@@ -14,7 +14,7 @@ import javax.ws.rs.core.Response;
 
 @Secure
 @SecurityRequirement(name = "JWT")
-@Tag(name = "Books",description = "Books sub-resource")
+@Tag(name = "Books", description = "Books sub-resource")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class BookDescriptionResource {

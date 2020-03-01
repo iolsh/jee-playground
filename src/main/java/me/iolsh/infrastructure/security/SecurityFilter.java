@@ -47,7 +47,7 @@ public class SecurityFilter implements ContainerRequestFilter {
         } catch (Exception e) {
             failedAuthorizationAttempts.inc();
             requestContext.abortWith(Response.status(Response.Status.FORBIDDEN).
-                entity(new RestExceptionTemplate(ERR_MSG, SOLUTION)).build());
+                    entity(new RestExceptionTemplate(ERR_MSG, SOLUTION)).build());
         }
     }
 }
