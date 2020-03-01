@@ -18,10 +18,7 @@ import javax.inject.Inject;
 import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.container.ResourceContext;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriInfo;
+import javax.ws.rs.core.*;
 import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,7 +26,7 @@ import java.util.stream.Collectors;
 @Secure
 @Path("/books")
 @SecurityRequirement(name = "JWT")
-@Tag(name = "Books", description = "Books resource")
+@Tag(name = "Books")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class BooksResource {
@@ -50,11 +47,10 @@ public class BooksResource {
     @APIResponses(
             value = {
                     @APIResponse(responseCode = "200", description = "List of books.",
-                            content = @Content(mediaType = "application/json",
-                                    schema = @Schema(implementation = List.class)))
+                            content = @Content(mediaType = "application/json"))
             })
     @Operation(summary = "Get books.", description = "Obtains list of books.")
-    public Response getBooks() {
+    public Response getBooks(@RequestBody @HeaderParam(HttpHeaders.AUTHORIZATION) String auth) {
         List<BookModel> books = bookRepository.findAll().stream().map(bookMapper::mapEntityToBook)
                 .collect(Collectors.toList());
         return Response.status(Response.Status.OK).entity(books).build();
@@ -62,7 +58,8 @@ public class BooksResource {
 
 
     @POST
-    public Response create(@Valid BookModel book, @Context UriInfo uriInfo) {
+    public Response create(@Valid BookModel book, @Context UriInfo uriInfo,
+                           @HeaderParam(HttpHeaders.AUTHORIZATION) String auth) {
         Book entity = bookRepository.create(bookMapper.mapBookToEntity(book));
         URI uri = uriInfo.getAbsolutePathBuilder().path(entity.getId()).build();
         return Response.created(uri).entity(entity).build();
@@ -77,7 +74,7 @@ public class BooksResource {
                                     schema = @Schema(implementation = BookModel.class)))
             })
     @Operation(summary = "Get book.", description = "Get single book.")
-    public Response getBook(@RequestBody @PathParam("id") String bookId) {
+    public Response getBook(@PathParam("id") String bookId, @HeaderParam(HttpHeaders.AUTHORIZATION) String auth) {
         Book book = bookRepository.getOne(bookId);
         return Response.ok().entity(bookMapper.mapEntityToBook(book)).build();
     }

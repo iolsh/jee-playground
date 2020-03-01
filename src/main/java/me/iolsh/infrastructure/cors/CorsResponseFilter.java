@@ -5,12 +5,11 @@ import javax.ws.rs.container.ContainerResponseContext;
 import javax.ws.rs.container.ContainerResponseFilter;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.ext.Provider;
-import java.io.IOException;
 import java.util.List;
 
 /**
  * See http://www.w3.org/TR/cors/
- * See https://github.com/AdamBien/cors
+ * TODO refactor this
  */
 @Provider
 public class CorsResponseFilter implements ContainerResponseFilter {
@@ -20,8 +19,9 @@ public class CorsResponseFilter implements ContainerResponseFilter {
     public final static String DEFAULT_EXPOSED_HEADERS = "location,info,Authorization";
 
     @Override
-    public void filter(ContainerRequestContext requestContext, ContainerResponseContext responseContext) throws IOException {
+    public void filter(ContainerRequestContext requestContext, ContainerResponseContext responseContext) {
         final MultivaluedMap<String, Object> headers = responseContext.getHeaders();
+        System.out.println("HEADERS: " + headers);
         headers.add("Access-Control-Allow-Origin", "*");
         headers.add("Access-Control-Allow-Headers", getRequestedAllowedHeaders(requestContext));
         headers.add("Access-Control-Expose-Headers", getRequestedExposedHeaders(requestContext));
