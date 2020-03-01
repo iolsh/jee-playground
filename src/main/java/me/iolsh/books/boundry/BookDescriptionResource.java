@@ -1,7 +1,7 @@
 package me.iolsh.books.boundry;
 
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import me.iolsh.infrastructure.security.Secure;
+import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirement;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.core.Context;
