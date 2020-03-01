@@ -5,6 +5,11 @@ import me.iolsh.books.control.BookMapper;
 import me.iolsh.books.entity.Book;
 import me.iolsh.books.entity.BookRepository;
 import me.iolsh.infrastructure.security.Secure;
+import org.eclipse.microprofile.openapi.annotations.Operation;
+import org.eclipse.microprofile.openapi.annotations.media.Content;
+import org.eclipse.microprofile.openapi.annotations.media.Schema;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirement;
 
 import javax.inject.Inject;
@@ -38,6 +43,13 @@ public class BooksResource {
     }
 
     @GET
+    @APIResponses(
+            value = {
+                    @APIResponse(responseCode = "200", description = "List of books.",
+                            content = @Content(mediaType = "application/json",
+                                    schema = @Schema(implementation = List.class)))
+            })
+    @Operation(summary = "Get books.", description = "Obtains list of books.")
     public Response getBooks() {
         List<BookModel> books = bookRepository.findAll().stream().map(bookMapper::mapEntityToBook)
                 .collect(Collectors.toList());
@@ -55,6 +67,13 @@ public class BooksResource {
 
     @GET
     @Path("{id}")
+    @APIResponses(
+            value = {
+                    @APIResponse(responseCode = "200", description = "Book.",
+                            content = @Content(mediaType = "application/json",
+                                    schema = @Schema(implementation = BookModel.class)))
+            })
+    @Operation(summary = "Get book.", description = "Get single book.")
     public Response getBook(@PathParam("id") String bookId) {
         Book book = bookRepository.getOne(bookId);
         return Response.ok().entity(bookMapper.mapEntityToBook(book)).build();
