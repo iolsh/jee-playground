@@ -10,7 +10,6 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 @ToString
 @Schema(description = "Book data")
 public class BookModel {
-    @Schema(required = true, example = "b3fc28d5-ac95-433b-8f5d-830cf28a3417")
     private String id;
     @Schema(required = true, example = "Warren Buffet")
     private String author;

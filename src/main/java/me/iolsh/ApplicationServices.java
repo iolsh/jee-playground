@@ -21,12 +21,10 @@ import javax.ws.rs.core.Application;
         components = @Components(
                 securitySchemes = {
                         @SecurityScheme(
-                                securitySchemeName = "JWT",
-                                scheme = "bearer",
-                                bearerFormat = "JWT",
+                                securitySchemeName = "bearerAuth",
                                 type = SecuritySchemeType.HTTP,
-                                description = "authentication needed to obtain restricted resources",
-                                in = SecuritySchemeIn.HEADER
+                                scheme = "bearer",
+                                bearerFormat = "JWT"
                         )
                 }
         )

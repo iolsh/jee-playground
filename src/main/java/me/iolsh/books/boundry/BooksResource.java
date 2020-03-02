@@ -8,7 +8,6 @@ import me.iolsh.infrastructure.security.Secure;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
-import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 import org.eclipse.microprofile.openapi.annotations.security.SecurityRequirement;
@@ -25,7 +24,7 @@ import java.util.stream.Collectors;
 
 @Secure
 @Path("/books")
-@SecurityRequirement(name = "JWT")
+@SecurityRequirement(name = "bearerAuth")
 @Tag(name = "Books")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
@@ -50,7 +49,7 @@ public class BooksResource {
                             content = @Content(mediaType = "application/json"))
             })
     @Operation(summary = "Get books.", description = "Obtains list of books.")
-    public Response getBooks(@RequestBody @HeaderParam(HttpHeaders.AUTHORIZATION) String auth) {
+    public Response getBooks() {
         List<BookModel> books = bookRepository.findAll().stream().map(bookMapper::mapEntityToBook)
                 .collect(Collectors.toList());
         return Response.status(Response.Status.OK).entity(books).build();
@@ -58,8 +57,7 @@ public class BooksResource {
 
 
     @POST
-    public Response create(@Valid BookModel book, @Context UriInfo uriInfo,
-                           @HeaderParam(HttpHeaders.AUTHORIZATION) String auth) {
+    public Response create(@Valid BookModel book, @Context UriInfo uriInfo) {
         Book entity = bookRepository.create(bookMapper.mapBookToEntity(book));
         URI uri = uriInfo.getAbsolutePathBuilder().path(entity.getId()).build();
         return Response.created(uri).entity(entity).build();
@@ -74,7 +72,7 @@ public class BooksResource {
                                     schema = @Schema(implementation = BookModel.class)))
             })
     @Operation(summary = "Get book.", description = "Get single book.")
-    public Response getBook(@PathParam("id") String bookId, @HeaderParam(HttpHeaders.AUTHORIZATION) String auth) {
+    public Response getBook(@PathParam("id") String bookId) {
         Book book = bookRepository.getOne(bookId);
         return Response.ok().entity(bookMapper.mapEntityToBook(book)).build();
     }

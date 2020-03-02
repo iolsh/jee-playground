@@ -6,7 +6,6 @@ import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
-import javax.ws.rs.HeaderParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.HttpHeaders;
@@ -14,7 +13,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 @Secure
-@SecurityRequirement(name = "JWT")
+@SecurityRequirement(name = "bearerAuth")
 @Tag(name = "Books")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
@@ -30,7 +29,7 @@ public class BookDescriptionResource {
     }
 
     @GET
-    public Response getDescription(@HeaderParam(HttpHeaders.AUTHORIZATION) String auth) {
+    public Response getDescription() {
         BookDescriptionModel descriptionModel = new BookDescriptionModel("descriptionId", bookId, "Some description");
         return Response.status(Response.Status.OK).entity(descriptionModel).build();
     }
