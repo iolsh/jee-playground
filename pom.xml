@@ -14,7 +14,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <version.javaee>8.0</version.javaee>
         <version.microprofile>3.2</version.microprofile>
-        <version.payara.micro>5.193.1</version.payara.micro>
+        <version.payara.micro>5.201</version.payara.micro>
         <version.lombok>1.16.16</version.lombok>
         <version.faker>0.16</version.faker>
         <version.bcrypt.lib>0.9.0</version.bcrypt.lib>
@@ -115,6 +115,11 @@
             <type>pom</type>
             <version>${version.microprofile}</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.microprofile-ext.openapi-ext</groupId>
+            <artifactId>swagger-ui</artifactId>
+            <version>1.0.3</version>
         </dependency>
         <!-- test -->
         <dependency>

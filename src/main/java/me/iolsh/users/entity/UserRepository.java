@@ -14,7 +14,7 @@ public class UserRepository extends AbstractHibernateRepository<User, Long> {
 
     public Optional<User> findUserByUserName(String userName) {
         return getNamedQuery(User.FIND_USER_BY_USER_NAME)
-            .setParameter("userName", userName).getResultStream().findFirst();
+                .setParameter("userName", userName).getResultStream().findFirst();
     }
 
 

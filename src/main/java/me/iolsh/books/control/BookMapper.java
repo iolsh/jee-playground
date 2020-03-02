@@ -7,5 +7,6 @@ import org.mapstruct.Mapper;
 @Mapper
 public interface BookMapper {
     BookModel mapEntityToBook(Book book);
+
     Book mapBookToEntity(BookModel model);
 }

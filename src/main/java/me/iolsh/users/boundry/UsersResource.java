@@ -11,15 +11,17 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
+import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 
-@Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
 @Path("/users")
+@Tag(name = "Users")
 public class UsersResource {
 
     @Context
@@ -40,18 +42,20 @@ public class UsersResource {
     @POST
     @Path("register")
     @APIResponses(
-        value = {
-            @APIResponse(responseCode = "204", description = "User created."),
-            @APIResponse(responseCode = "400", description ="User already exists.")
-     })
-    @Operation(summary = "Register new user.", description = "Creates new user in application.")
+            value = {
+                    @APIResponse(responseCode = "204", description = "User created."),
+                    @APIResponse(responseCode = "400", description = "User already exists.")
+            })
+    @Operation(summary = "Register new user.", description = "Creates new user in application.", operationId = "register")
     public Response register(
             @RequestBody(description = "New user data.", required = true,
-            content = @Content(
-                schema = @Schema(implementation = UserModel.class)
-            ))
-            @Valid  UserModel user) {
-        userRepository.findUserByUserName(user.getUserName()).ifPresent(u -> {throw new UserAlreadyExistsException();});
+                    content = @Content(
+                            schema = @Schema(implementation = UserModel.class)
+                    ))
+            @Valid UserModel user) {
+        userRepository.findUserByUserName(user.getUserName()).ifPresent(u -> {
+            throw new UserAlreadyExistsException();
+        });
         user.setPassword(security.hash(user.getPassword()));
         userRepository.create(userModelToEntityMapper.mapUserToEntity(user));
         return Response.noContent().build();
@@ -60,19 +64,19 @@ public class UsersResource {
     @POST
     @Path("login")
     @APIResponses(
-        value = {
-            @APIResponse(responseCode = "200", description = "Authenticated.",
-                headers = {
-                    @Header(name = HttpHeaders.AUTHORIZATION,
-                        description = "JWT token used for authorization against secured resources.")
-                }),
-            @APIResponse(responseCode = "401", description ="Unauthorized.")
-        }
+            value = {
+                    @APIResponse(responseCode = "200", description = "Authenticated.",
+                            headers = {
+                                    @Header(name = HttpHeaders.AUTHORIZATION,
+                                            description = "JWT token used for authorization against secured resources.")
+                            }),
+                    @APIResponse(responseCode = "401", description = "Unauthorized.")
+            }
     )
     @Operation(summary = "Authenticate.", description = "Authenticates user in application.")
-    public Response login(@Valid  LoginModel loginModel) {
+    public Response login(@Valid LoginModel loginModel) {
         User user = userRepository.findUserByUserName(loginModel.getUserName())
-            .orElseThrow(InvalidCredentialsException::new);
+                .orElseThrow(InvalidCredentialsException::new);
         String hash = user.getPassword();
         if (security.verifyPassword(loginModel.getPassword(), hash)) {
             String token = security.createToken(user, Security.TOKEN_VALIDITY, uriInfo);

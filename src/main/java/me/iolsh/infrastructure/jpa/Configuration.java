@@ -26,14 +26,18 @@ public class Configuration {
     @PersistenceUnit
     EntityManagerFactory entityManagerFactory;
 
-    @Produces @ContainerManaged @RequestScoped
+    @Produces
+    @ContainerManaged
+    @RequestScoped
     public EntityManager createEntityManager() {
         EntityManager em = this.entityManager;
         logger.debug("Providing container managed EntityManager {} ...", em);
         return em;
     }
 
-    @Produces @ApplicationManaged @RequestScoped
+    @Produces
+    @ApplicationManaged
+    @RequestScoped
     public EntityManager createApplicationManagedEntityManger() {
         EntityManager em = entityManagerFactory.createEntityManager();
         logger.debug("Providing application managed EntityManager {} ...", em);

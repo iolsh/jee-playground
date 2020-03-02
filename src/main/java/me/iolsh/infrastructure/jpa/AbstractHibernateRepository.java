@@ -21,7 +21,8 @@ public abstract class AbstractHibernateRepository<T, I> implements OnCreated<T> 
 
     private final Class<T> persistentClass;
 
-    @Inject @ContainerManaged
+    @Inject
+    @ContainerManaged
     private EntityManager entityManager;
 
     @Inject
