@@ -8,6 +8,9 @@ import org.eclipse.microprofile.openapi.annotations.info.Contact;
 import org.eclipse.microprofile.openapi.annotations.info.Info;
 import org.eclipse.microprofile.openapi.annotations.info.License;
 import org.eclipse.microprofile.openapi.annotations.security.SecurityScheme;
+import org.eclipse.microprofile.openapi.annotations.servers.Server;
+import org.eclipse.microprofile.openapi.annotations.tags.Tag;
+
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
@@ -27,7 +30,13 @@ import javax.ws.rs.core.Application;
                                 bearerFormat = "JWT"
                         )
                 }
-        )
+        ),
+        tags = {
+                @Tag(name = "Books"), @Tag(name = "Users")
+        },
+        servers = {
+                @Server(url = "http://localhost:8080/micro-playground", description = "Local JEE server")
+        }
 )
 public class ApplicationServices extends Application {
 

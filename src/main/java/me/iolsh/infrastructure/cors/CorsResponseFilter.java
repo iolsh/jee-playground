@@ -21,7 +21,7 @@ public class CorsResponseFilter implements ContainerResponseFilter {
     @Override
     public void filter(ContainerRequestContext requestContext, ContainerResponseContext responseContext) {
         final MultivaluedMap<String, Object> headers = responseContext.getHeaders();
-        System.out.println("HEADERS: " + headers);
+
         headers.add("Access-Control-Allow-Origin", "*");
         headers.add("Access-Control-Allow-Headers", getRequestedAllowedHeaders(requestContext));
         headers.add("Access-Control-Expose-Headers", getRequestedExposedHeaders(requestContext));
