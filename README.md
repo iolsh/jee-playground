@@ -12,12 +12,9 @@
 Execute ```mvn clean package payara-micro:start```
 
 ### Play with something
-* See http://localhost:8080/openapi/ for available REST endpoints
+* See http://localhost:8080//micro-playground for details
 
-### TODO - check:
-* https://www.devwithimagination.com/2019/09/03/integration-testing-with-payara-micro/?utm_content=100156467&utm_medium=social&utm_source=twitter&hss_channel=tw-2599580401
-* http://arquillian.org/guides/
-* https://github.com/javaee-samples/javaee8-samples
+
 
 
 

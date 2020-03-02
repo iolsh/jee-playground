@@ -3,13 +3,18 @@
 <head>
     <title>Start Page</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <script src="js/jquery-3.3.1.slim.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/custom-elements.min.js"></script>
+    <script src="js/shadydom.min.js"></script>
 </head>
 <body>
-<h1>Hello from JEE Playground!</h1>
-<br>See
-<a href="http://localhost:8080/openapi/">Api docs</a>
-or
-<a href="http://localhost:8080/micro-playground/api/openapi-ui/">Swagger UI</a> for things to play with.
-</p>
+<app-info
+        openApi="http://localhost:8080/openapi/"
+        swaggerUi="http://localhost:8080/micro-playground/api/openapi-ui/">
+</app-info>
+<script src="js/info.js"></script>
 </body>
 </html>
