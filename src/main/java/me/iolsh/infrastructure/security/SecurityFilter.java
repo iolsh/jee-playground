@@ -27,18 +27,24 @@ public class SecurityFilter implements ContainerRequestFilter {
 
 
     private final Security security;
+    private final Counter notLoggedInCounter;
     private final Counter failedAuthorizationAttempts;
 
     @Inject
-    public SecurityFilter(Security security, @Metric Counter failedAuthorizationAttempts) {
+    public SecurityFilter(
+            Security security,
+            @Metric(name ="failedAuthorization") Counter failedAuthorizationAttempts,
+            @Metric(name ="notLoggedIn") Counter notLoggedInCounter) {
         this.security = security;
         this.failedAuthorizationAttempts = failedAuthorizationAttempts;
+        this.notLoggedInCounter = notLoggedInCounter;
     }
 
     @Override
     public void filter(ContainerRequestContext requestContext) throws IOException {
         String authHeader = requestContext.getHeaderString(HttpHeaders.AUTHORIZATION);
         if (authHeader == null || !authHeader.startsWith(BEARER)) {
+            notLoggedInCounter.inc();
             throw new NotAuthorizedException();
         }
         String token = authHeader.substring(BEARER.length()).trim();
