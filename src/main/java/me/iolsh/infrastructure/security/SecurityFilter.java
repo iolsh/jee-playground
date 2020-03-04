@@ -7,7 +7,6 @@ import org.eclipse.microprofile.metrics.annotation.Metric;
 
 import javax.annotation.Priority;
 import javax.inject.Inject;
-import javax.ws.rs.NotAuthorizedException;
 import javax.ws.rs.Priorities;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerRequestFilter;
@@ -26,19 +25,21 @@ public class SecurityFilter implements ContainerRequestFilter {
     private static final String ERR_MSG = "Token invalid.";
     private static final String SOLUTION = "Provide valid token.";
 
-    @Inject
-    private Security security;
+
+    private final Security security;
+    private final Counter failedAuthorizationAttempts;
 
     @Inject
-    @Metric
-    private Counter failedAuthorizationAttempts;
-
+    public SecurityFilter(Security security, @Metric Counter failedAuthorizationAttempts) {
+        this.security = security;
+        this.failedAuthorizationAttempts = failedAuthorizationAttempts;
+    }
 
     @Override
     public void filter(ContainerRequestContext requestContext) throws IOException {
         String authHeader = requestContext.getHeaderString(HttpHeaders.AUTHORIZATION);
         if (authHeader == null || !authHeader.startsWith(BEARER)) {
-            throw new NotAuthorizedException("No valid token found");
+            throw new NotAuthorizedException();
         }
         String token = authHeader.substring(BEARER.length()).trim();
         Key key = security.generateKey(Security.JWT_SECRET);
