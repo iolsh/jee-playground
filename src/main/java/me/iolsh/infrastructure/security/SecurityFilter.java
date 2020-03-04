@@ -37,7 +37,6 @@ public class SecurityFilter implements ContainerRequestFilter {
     @Override
     public void filter(ContainerRequestContext requestContext) throws IOException {
         String authHeader = requestContext.getHeaderString(HttpHeaders.AUTHORIZATION);
-        System.out.println("Auth HEADER: " + authHeader);
         if (authHeader == null || !authHeader.startsWith(BEARER)) {
             throw new NotAuthorizedException("No valid token found");
         }
