@@ -12,7 +12,7 @@
 Execute ```mvn clean package payara-micro:start```
 
 ### Play with something
-* See http://localhost:8080//micro-playground for details
+* See http://localhost:8080/micro-playground for details
 
 
 
