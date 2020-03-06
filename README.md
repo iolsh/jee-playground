@@ -1,4 +1,4 @@
-[![CircleCI](https://circleci.com/gh/iolsh/micro-playground.svg?style=svg)](https://circleci.com/gh/iolsh/micro-playground)
+[![CircleCI](https://circleci.com/gh/iolsh/jee-playground.svg?style=svg)](https://circleci.com/gh/iolsh/jee-playground)
 # micro-playground
 ### Playground for JEE  
 * Payara micro / JEE 8 
