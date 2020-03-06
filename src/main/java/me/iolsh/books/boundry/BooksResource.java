@@ -4,6 +4,7 @@ package me.iolsh.books.boundry;
 import me.iolsh.books.control.BookMapper;
 import me.iolsh.books.entity.Book;
 import me.iolsh.books.entity.BookRepository;
+import me.iolsh.infrastructure.exceptions.RestExceptionTemplate;
 import me.iolsh.infrastructure.security.Secure;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
@@ -73,7 +74,7 @@ public class BooksResource {
             })
     @Operation(summary = "Get book.", description = "Get single book.")
     public Response getBook(@PathParam("id") String bookId) {
-        Book book = bookRepository.getOne(bookId);
+        Book book = bookRepository.findById(bookId).orElseThrow(BookNotFoundException::new);
         return Response.ok().entity(bookMapper.mapEntityToBook(book)).build();
     }
 
