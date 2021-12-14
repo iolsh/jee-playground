@@ -25,7 +25,7 @@
         <version.hibernate>5.2.10.Final</version.hibernate>
         <version.h2>1.4.193</version.h2>
         <version.rabbiteasy>1.2.0</version.rabbiteasy>
-        <version.log4j>2.15.0</version.log4j>
+        <version.log4j>2.16.0</version.log4j>
         <version.jjwt>0.9.0</version.jjwt>
     </properties>
 
